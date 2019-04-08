@@ -1,14 +1,3 @@
 log.txt
 Programm/Win32/
-*.dfm
-Programm/__history/Project2.cpp.~1~
-Programm/__history/uFrmMain.dfm.~1~
-Programm/__history/uFrmMain.dfm.~2~
-Programm/__history/uFrmMain.h.~1~
-Programm/__history/uFrmMain.h.~2~
-*.dfm
-Programm/uFrmMain.dfm
-Programm/Project2.cpp
-*.cbproj
-Programm/Project2.cbproj.local
-Programm/__recovery/__recovery.ini
+
