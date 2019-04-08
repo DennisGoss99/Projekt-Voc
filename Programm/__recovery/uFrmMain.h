@@ -12,7 +12,7 @@
 #include <Vcl.Samples.Gauges.hpp>
 #include <Data.DB.hpp>
 #include <Data.Win.ADODB.hpp>
-#include "Unit1.h"
+
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {
@@ -65,7 +65,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	TLabel *flbLoginName;
 	TLabel *flbLoginNot;
 	TADOConnection *ADOConnection1;
-	void __fastcall FormShow(TObject *Sender);
+	void __fastcall fbtLoginClick(TObject *Sender);
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 	__fastcall TfrmMain(TComponent* Owner);

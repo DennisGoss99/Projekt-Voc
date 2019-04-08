@@ -3,21 +3,15 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "uFrmMain.h"
+#include "Unit1.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TfrmMain *frmMain;
+TForm1 *Form1;
 //---------------------------------------------------------------------------
-__fastcall TfrmMain::TfrmMain(TComponent* Owner)
+__fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormShow(TObject *Sender)
-{
-   Form1->show();
-}
-//---------------------------------------------------------------------------
-

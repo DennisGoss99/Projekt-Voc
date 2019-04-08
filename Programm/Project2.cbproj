@@ -63,7 +63,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppVCLApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <AllPackageLibs>rtl.lib;vcl.lib;VclSmp.lib;vclx.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;VclSmp.lib;vclx.lib;dbrtl.lib;adortl.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -114,7 +114,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;VclSmp.bpi;vclx.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;VclSmp.bpi;vclx.bpi;dbrtl.bpi;adortl.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
@@ -145,7 +145,14 @@
             <DependentOn>uFrmMain.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit1.cpp">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit1.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
         <FormResources Include="uFrmMain.dfm"/>
+        <FormResources Include="Unit1.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

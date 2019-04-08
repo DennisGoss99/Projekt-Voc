@@ -12,6 +12,7 @@ object frmMain: TfrmMain
   Font.Style = []
   Menu = fMainMenu
   OldCreateOrder = False
+  OnShow = FormShow
   DesignSize = (
     738
     416)
@@ -48,7 +49,6 @@ object frmMain: TfrmMain
     Anchors = [akLeft, akTop, akRight, akBottom]
     Enabled = False
     TabOrder = 0
-    ExplicitHeight = 380
     DesignSize = (
       739
       392)
@@ -478,5 +478,13 @@ object frmMain: TfrmMain
     object Hilfe2: TMenuItem
       Caption = '&Hilfe'
     end
+  end
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=DataV' +
+      'oc'
+    LoginPrompt = False
+    Left = 345
   end
 end
