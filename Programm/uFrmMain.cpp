@@ -4,7 +4,7 @@
 #pragma hdrstop
 
 #include "uFrmMain.h"
-
+#include "cDBService.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -15,9 +15,13 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormShow(TObject *Sender)
+
+
+void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 {
-   Form1->show();
+
+cDBService.SqlLoginCheck("Select * from User" , "Surname" , "Password" , fedLoginName-> , fedLoginPW->Text);
+
 }
 //---------------------------------------------------------------------------
 

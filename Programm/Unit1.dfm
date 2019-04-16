@@ -13,4 +13,40 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 56
+    Width = 633
+    Height = 249
+    DataSource = DataSource1
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 88
+    Top = 310
+    Width = 240
+    Height = 25
+    DataSource = DataSource1
+    TabOrder = 1
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 240
+    Top = 24
+  end
+  object ADOQuery1: TADOQuery
+    Active = True
+    Connection = frmMain.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'Select * from User')
+    Left = 176
+    Top = 24
+  end
 end

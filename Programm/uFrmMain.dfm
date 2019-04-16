@@ -12,7 +12,6 @@ object frmMain: TfrmMain
   Font.Style = []
   Menu = fMainMenu
   OldCreateOrder = False
-  OnShow = FormShow
   DesignSize = (
     738
     416)
@@ -442,6 +441,7 @@ object frmMain: TfrmMain
     Anchors = [akTop, akRight]
     Caption = 'Login'
     TabOrder = 3
+    OnClick = fbtLoginClick
   end
   object fedLoginName: TEdit
     Left = 340
@@ -479,12 +479,21 @@ object frmMain: TfrmMain
       Caption = '&Hilfe'
     end
   end
-  object ADOConnection1: TADOConnection
-    Connected = True
+  object mainADOConnection: TADOConnection
     ConnectionString = 
       'Provider=MSDASQL.1;Persist Security Info=False;Data Source=DataV' +
-      'oc'
+      'oc;'
     LoginPrompt = False
-    Left = 345
+    Provider = 'MSDASQL.1'
+    Left = 105
+  end
+  object mainDataSource: TDataSource
+    DataSet = mainADOQuery
+    Left = 192
+  end
+  object mainADOQuery: TADOQuery
+    Connection = mainADOConnection
+    Parameters = <>
+    Left = 152
   end
 end
