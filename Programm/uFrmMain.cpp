@@ -23,7 +23,7 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 void UpdateAfterLogin(void)
 {
 	frmMain->flbLoginNot->Caption = "Willkommen " + mainUser->get_username();
-	frmMain->fPnMain->Enabled = true;
+	frmMain->fPnMainLeft->Enabled = true;
 }
 
 void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
@@ -45,6 +45,19 @@ if(tempUser)
 }
 
 
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TfrmMain::sgaSbChange(TObject *Sender)
+{
+	frmMain->mPnStatistic->Left =- frmMain->sgaSb->Position;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::FormResize(TObject *Sender)
+{
+	frmMain->sgaSb->Update();
 }
 //---------------------------------------------------------------------------
 

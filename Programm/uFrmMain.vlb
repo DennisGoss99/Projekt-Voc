@@ -2,7 +2,7 @@
 Coordinates=379,166,88,36
 
 []
-Coordinates=748,133,91,36
+Coordinates=76,155,101,124
 
 [Module Settings]
 ModelLayerNames=NewLayer0
@@ -22,9 +22,6 @@ Coordinates=144,10,82,58
 
 [fedLoginName]
 Coordinates=213,78,98,58
-
-[fPnMain]
-Coordinates=10,78,62,58
 
 [sga0]
 Coordinates=450,150,42,36
@@ -74,9 +71,6 @@ Coordinates=162,413,48,36
 
 [flbLoginName]
 Coordinates=494,78,94,58
-
-[vcbUnit]
-Coordinates=76,155,101,124
 
 [ilb4]
 Coordinates=110,1,49,58
