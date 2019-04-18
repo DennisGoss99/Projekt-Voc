@@ -12,12 +12,12 @@
 #include <Vcl.Samples.Gauges.hpp>
 #include <Data.DB.hpp>
 #include <Data.Win.ADODB.hpp>
-#include <Vcl.ComCtrls.hpp>
 
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {
 __published:	// Von der IDE verwaltete Komponenten
+	TPanel *fPnMain;
 	TEdit *fedLoginName;
 	TEdit *fedLoginPw;
 	TButton *fbtLogin;
@@ -28,6 +28,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	TLabel *mlbStatisticF;
 	TGroupBox *mgrbVoc;
 	TButton *mbtnStartVoc;
+	TComboBox *vcbUnit;
 	TImage *uimUnit;
 	TLabel *ulbVocLag;
 	TLabel *ulbVocAn;
@@ -66,16 +67,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	TADOConnection *mainADOConnection;
 	TDataSource *mainDataSource;
 	TADOQuery *mainADOQuery;
-	TPanel *fPnMainRight;
-	TPanel *fPnMainLeft;
-	TPanel *fPnMainTop;
-	TSplitter *Splitter1;
-	TScrollBar *sgaSb;
-	TPanel *mPnStatisticMain;
-	TComboBox *vcmbUnit;
 	void __fastcall fbtLoginClick(TObject *Sender);
-	void __fastcall sgaSbChange(TObject *Sender);
-	void __fastcall FormResize(TObject *Sender);
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 	__fastcall TfrmMain(TComponent* Owner);
