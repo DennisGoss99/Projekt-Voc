@@ -124,6 +124,10 @@
             <DependentOn>cDBService.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <CppCompile Include="cUser.cpp">
+            <DependentOn>cUser.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Project2.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>

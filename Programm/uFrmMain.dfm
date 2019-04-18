@@ -12,6 +12,7 @@ object frmMain: TfrmMain
   Font.Style = []
   Menu = fMainMenu
   OldCreateOrder = False
+  Position = poDesigned
   DesignSize = (
     738
     416)
