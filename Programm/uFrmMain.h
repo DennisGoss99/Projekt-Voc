@@ -76,12 +76,18 @@ __published:	// Von der IDE verwaltete Komponenten
 	TPanel *mPnStatisticMain;
 	TComboBox *vcmbUnit;
 	TImageCollection *mainImageCollection;
+	TMenuItem *Log1;
+	TMenuItem *Leeren1;
+	TMenuItem *Anschalten1;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall sgaSbChange(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall vcmbUnitChange(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall Anschalten1Click(TObject *Sender);
+	void __fastcall Leeren1Click(TObject *Sender);
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 	__fastcall TfrmMain(TComponent* Owner);

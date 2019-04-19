@@ -15,6 +15,7 @@ object frmMain: TfrmMain
   Position = poDesigned
   OnClose = FormClose
   OnResize = FormResize
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
@@ -543,6 +544,20 @@ object frmMain: TfrmMain
     end
     object Hilfe2: TMenuItem
       Caption = '&Hilfe'
+      object Log1: TMenuItem
+        Caption = 'Log'
+        object Leeren1: TMenuItem
+          Caption = 'Leeren'
+          OnClick = Leeren1Click
+        end
+        object Anschalten1: TMenuItem
+          AutoCheck = True
+          Caption = 'An-/Ausschalten'
+          Checked = True
+          RadioItem = True
+          OnClick = Anschalten1Click
+        end
+      end
     end
   end
   object mainADOConnection: TADOConnection

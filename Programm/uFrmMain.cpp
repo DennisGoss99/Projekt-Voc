@@ -7,6 +7,7 @@
 #include "uFrmMain.h"
 #include "cDBService.h"
 #include "cUser.h"
+#include "cLogSystem.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -59,11 +60,12 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 		UpdateAfterLogin();
 
 		Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
-
+		myLog.Add("Anmeldung User:" + fedLoginName->Text,1);
 
 	}else
 	{
 		Application->MessageBox(L"Benutzername oder Password Wing Wong",L"Anmeldung war nicht erfolgreich",MB_OK);
+		myLog.Add("Felgeschlagende Anmeldung User:" + fedLoginName->Text,1);
 	}
 }
 //---------------------------------------------------------------------------
@@ -101,6 +103,26 @@ void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 	frmMain->ulbVocBea->Caption = "Vokabeln bearbeitet: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 1", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
 	frmMain->ulbVocOp->Caption = "Vokabeln offen: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 0", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
 	frmMain->ulbVocTim->Caption = "Letzte Bearbeitung: " + cDBService.SqlGetOneParameter("Unit","LastEdit","UnitName = '" + frmMain->vcmbUnit->Text+ "'");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::FormShow(TObject *Sender)
+{
+	frmMain->Anschalten1->Checked = myLog.get_enableLog();
+	myLog.Add("---- Programm gestartet ----");
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TfrmMain::Anschalten1Click(TObject *Sender)
+{
+	myLog.set_enableLog(frmMain->Anschalten1->Checked);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
+{
+    myLog.Clear();
 }
 //---------------------------------------------------------------------------
 

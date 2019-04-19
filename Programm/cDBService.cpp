@@ -4,6 +4,7 @@
 
 #include "cDBService.h"
 #include "uFrmMain.h"
+#include "cLogSystem.h"
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
@@ -18,7 +19,7 @@ wchar_t * cDBService::AnsiTowchar_t(AnsiString Str)
 
 AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String Where,String Star,String InnerJoin,String GroupBy)
 {
-	//Application->MessageBox(AnsiTowchar_t("Select "+ Star +" from " + Table +" "+ InnerJoin + " Where " + Where + " " + GroupBy),L"Hallo",MB_OK);
+	myLog.Add("Select "+ Star +" from " + Table +" "+ InnerJoin + " Where " + Where + " " + GroupBy);
 
 	frmMain->mainADOQuery->Close();
 	frmMain->mainADOQuery->SQL->Clear();
@@ -34,6 +35,7 @@ AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String W
 
 int cDBService::SqlLoginCheck(String SQL,String AttributeUser , String AttributeEmail ,String AttributePassword ,String User,String Password)
 {
+	myLog.Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + Password + "' LIMIT 1" );
 	frmMain->mainADOQuery->Close();
 	frmMain->mainADOQuery->SQL->Clear();
 	frmMain->mainADOQuery->SQL->Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + Password + "' LIMIT 1" );
@@ -47,22 +49,23 @@ int cDBService::SqlLoginCheck(String SQL,String AttributeUser , String Attribute
 
 std::vector<AnsiString> cDBService::SqlGetArray(String Table,String Attribute,String AttributeId,AnsiString Id)
 {
-   	 frmMain->mainADOQuery->Close();
-	 frmMain->mainADOQuery->SQL->Clear();
-	 frmMain->mainADOQuery->SQL->Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
-	 frmMain->mainADOQuery->Open();
+	myLog.Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
+	frmMain->mainADOQuery->Close();
+	frmMain->mainADOQuery->SQL->Clear();
+	frmMain->mainADOQuery->SQL->Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
+	frmMain->mainADOQuery->Open();
 
-	 std::vector<AnsiString> returnList;
+	std::vector<AnsiString> returnList;
 
-	 frmMain->mainADOQuery->First();
+	frmMain->mainADOQuery->First();
 
 
-	 for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
-		 returnList.push_back( frmMain->mainADOQuery->FieldByName(Attribute)->AsAnsiString);
-		 frmMain->mainADOQuery->Next();
-	 }
+	for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
+		returnList.push_back( frmMain->mainADOQuery->FieldByName(Attribute)->AsAnsiString);
+		frmMain->mainADOQuery->Next();
+	}
 
-	 return returnList;
+	return returnList;
 }
 /*
 	 frmMain->mainADOQuery->Close();
