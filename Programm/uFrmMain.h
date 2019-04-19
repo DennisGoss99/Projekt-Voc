@@ -13,6 +13,8 @@
 #include <Data.DB.hpp>
 #include <Data.Win.ADODB.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
 
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
@@ -73,9 +75,13 @@ __published:	// Von der IDE verwaltete Komponenten
 	TScrollBar *sgaSb;
 	TPanel *mPnStatisticMain;
 	TComboBox *vcmbUnit;
+	TImageCollection *mainImageCollection;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall sgaSbChange(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
+	void __fastcall Beenden1Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall vcmbUnitChange(TObject *Sender);
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 	__fastcall TfrmMain(TComponent* Owner);

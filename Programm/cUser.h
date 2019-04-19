@@ -16,8 +16,8 @@ class User{
 		AnsiString creationDate;
 		AnsiString username;
 
-		void GetSQLValues(int idUser);
-		void GetSQLValues(AnsiString surname);
+		void GetSQLValues(AnsiString idUser);
+		void GetSQLValuesS(AnsiString surname);
 
 	 public:
 

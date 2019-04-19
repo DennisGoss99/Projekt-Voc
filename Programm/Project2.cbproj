@@ -57,7 +57,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppVCLApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <AllPackageLibs>rtl.lib;vcl.lib;VclSmp.lib;vclx.lib;dbrtl.lib;adortl.lib;vcldb.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;VclSmp.lib;vclx.lib;dbrtl.lib;adortl.lib;vcldb.lib;vclwinx.lib;vclimg.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -106,9 +106,13 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;VclSmp.bpi;vclx.bpi;dbrtl.bpi;adortl.bpi;vcldb.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;VclSmp.bpi;vclx.bpi;dbrtl.bpi;adortl.bpi;vcldb.bpi;vclwinx.bpi;vclimg.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_Optimize>true</DCC_Optimize>
+        <BCC_DisableOptimizations>false</BCC_DisableOptimizations>
+        <BCC_OptimizeJumps>true</BCC_OptimizeJumps>
+        <BCC_SelectedOptimizations>true</BCC_SelectedOptimizations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

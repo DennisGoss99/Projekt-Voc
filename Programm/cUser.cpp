@@ -7,24 +7,24 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-void User::GetSQLValues(int idUser)
+void User::GetSQLValues(AnsiString idUser)
 {
-	surname = cDBService.SqlGetOneParameter("User","Surname","idUser",idUser);
-	name = cDBService.SqlGetOneParameter("User","Name","idUser",idUser);
-	email = cDBService.SqlGetOneParameter("User","Email","idUser",idUser);
-	password = cDBService.SqlGetOneParameter("User","Password","idUser",idUser);
-	creationDate = cDBService.SqlGetOneParameter("User","CreationDate","idUser",idUser);
-	username = cDBService.SqlGetOneParameter("User","Username","idUser",idUser);
+	surname = cDBService.SqlGetOneParameter("User","Surname","idUser = " + idUser);
+	name = cDBService.SqlGetOneParameter("User","Name","idUser = " + idUser);
+	email = cDBService.SqlGetOneParameter("User","Email","idUser = " + idUser);
+	password = cDBService.SqlGetOneParameter("User","Password","idUser = " + idUser);
+	creationDate = cDBService.SqlGetOneParameter("User","CreationDate","idUser = " + idUser);
+	username = cDBService.SqlGetOneParameter("User","Username","idUser = " + idUser);
 }
 
-void User::GetSQLValues(AnsiString surname)
+void User::GetSQLValuesS(AnsiString surname)
 {
-	idUser = cDBService.SqlGetOneParameter("User","idUser","Surname",surname).ToInt();
-	name = cDBService.SqlGetOneParameter("User","Name","Surname",surname);
-	email = cDBService.SqlGetOneParameter("User","Email","Surname",surname);
-	password = cDBService.SqlGetOneParameter("User","Password","Surname",surname);
-	creationDate = cDBService.SqlGetOneParameter("User","CreationDate","Surname",surname);
-	username = cDBService.SqlGetOneParameter("User","Username","Surname",surname);
+	idUser = cDBService.SqlGetOneParameter("User","idUser","Surname = '" + surname+ "'").ToInt();
+	name = cDBService.SqlGetOneParameter("User","Name","Surname = '" + surname+ "'");
+	email = cDBService.SqlGetOneParameter("User","Email","Surname = '" + surname+ "'");
+	password = cDBService.SqlGetOneParameter("User","Password","Surname = '" + surname+ "'");
+	creationDate = cDBService.SqlGetOneParameter("User","CreationDate","Surname = '" + surname+ "'");
+	username = cDBService.SqlGetOneParameter("User","Username","Surname = '" + surname + "'");
 }
 
 User::User(){}

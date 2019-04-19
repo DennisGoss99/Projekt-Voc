@@ -16,11 +16,14 @@ wchar_t * cDBService::AnsiTowchar_t(AnsiString Str)
 	delete str;
 }
 
-AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String AttributeId,AnsiString Id)
+AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String Where,String Star,String InnerJoin,String GroupBy)
 {
+	//Application->MessageBox(AnsiTowchar_t("Select "+ Star +" from " + Table +" "+ InnerJoin + " Where " + Where + " " + GroupBy),L"Hallo",MB_OK);
+
 	frmMain->mainADOQuery->Close();
 	frmMain->mainADOQuery->SQL->Clear();
-	frmMain->mainADOQuery->SQL->Add("Select * from " + Table + " Where " + AttributeId + " = " + Id);
+	frmMain->mainADOQuery->SQL->Add("Select "+ Star +" from " + Table +" "+ InnerJoin + " Where " + Where + " " + GroupBy );
+
 	frmMain->mainADOQuery->Open();
 
 	frmMain->mainADOQuery->First();
@@ -42,8 +45,27 @@ int cDBService::SqlLoginCheck(String SQL,String AttributeUser , String Attribute
 	return frmMain->mainADOQuery->FieldByName("idUser")->AsInteger;
 }
 
-/*
+std::vector<AnsiString> cDBService::SqlGetArray(String Table,String Attribute,String AttributeId,AnsiString Id)
+{
    	 frmMain->mainADOQuery->Close();
+	 frmMain->mainADOQuery->SQL->Clear();
+	 frmMain->mainADOQuery->SQL->Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
+	 frmMain->mainADOQuery->Open();
+
+	 std::vector<AnsiString> returnList;
+
+	 frmMain->mainADOQuery->First();
+
+
+	 for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
+		 returnList.push_back( frmMain->mainADOQuery->FieldByName(Attribute)->AsAnsiString);
+		 frmMain->mainADOQuery->Next();
+	 }
+
+	 return returnList;
+}
+/*
+	 frmMain->mainADOQuery->Close();
 	 frmMain->mainADOQuery->SQL->Clear();
 	 frmMain->mainADOQuery->SQL->Add(SQL + " Where " + AttributeUser + " like '" + User + "' && " + AttributePassword + " = '" + Password + "'");
 	 frmMain->mainADOQuery->Open();
