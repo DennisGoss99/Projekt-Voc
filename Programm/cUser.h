@@ -29,7 +29,7 @@ class User{
 	 int get_idUser() { return idUser;}
 	 AnsiString get_username() { return username;}
 
-	 AnsiString get_ALL() {return idUser +"|"+ surname +"|"+ name +"|"+ email +"|"+ password +"|"+ creationDate +"|"+ username;}
+	 //AnsiString get_ALL() {return idUser +"|"+ surname +"|"+ name +"|"+ email +"|"+ password +"|"+ creationDate +"|"+ username;}
 
 };
 #endif

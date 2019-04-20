@@ -122,7 +122,7 @@ void __fastcall TfrmMain::Anschalten1Click(TObject *Sender)
 
 void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 {
-    myLog.Clear();
+	myLog.Clear();
 }
 //---------------------------------------------------------------------------
 
