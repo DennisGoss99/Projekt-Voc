@@ -23,8 +23,6 @@ __published:	// Von der IDE verwaltete Komponenten
 	TEdit *fedLoginName;
 	TEdit *fedLoginPw;
 	TButton *fbtLogin;
-	TGauge *sga0;
-	TPanel *mPnStatistic;
 	TLabel *mlbStatisticG;
 	TLabel *mlbStatisticR;
 	TLabel *mlbStatisticF;
@@ -36,15 +34,6 @@ __published:	// Von der IDE verwaltete Komponenten
 	TLabel *ulbVocBea;
 	TGroupBox *vgrbUnit;
 	TLabel *ulbVocOp;
-	TGauge *sga1;
-	TGauge *sga2;
-	TGauge *sga3;
-	TGauge *sga4;
-	TGauge *sga5;
-	TGauge *sga6;
-	TGauge *sga7;
-	TGauge *sga8;
-	TGauge *sga9;
 	TGroupBox *mgrbInfo;
 	TLabel *ilb0;
 	TLabel *ilb1;
@@ -72,25 +61,32 @@ __published:	// Von der IDE verwaltete Komponenten
 	TPanel *fPnMainLeft;
 	TPanel *fPnMainTop;
 	TSplitter *Splitter1;
-	TScrollBar *sgaSb;
 	TPanel *mPnStatisticMain;
 	TComboBox *vcmbUnit;
 	TImageCollection *mainImageCollection;
 	TMenuItem *Log1;
 	TMenuItem *Leeren1;
 	TMenuItem *Anschalten1;
+	TPaintBox *mPbStatistic;
 	void __fastcall fbtLoginClick(TObject *Sender);
-	void __fastcall sgaSbChange(TObject *Sender);
-	void __fastcall FormResize(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall vcmbUnitChange(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall Anschalten1Click(TObject *Sender);
 	void __fastcall Leeren1Click(TObject *Sender);
+	void __fastcall FormPaint(TObject *Sender);
+
+
+
+
+
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 	__fastcall TfrmMain(TComponent* Owner);
+	void PlotStatistics(void);
+	void UpdateUI(void);
+	void UpdateAfterLogin(void);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

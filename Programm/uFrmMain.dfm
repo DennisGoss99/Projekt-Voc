@@ -14,7 +14,7 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poDesigned
   OnClose = FormClose
-  OnResize = FormResize
+  OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -75,220 +75,24 @@ object frmMain: TfrmMain
       ParentFont = False
     end
     object mPnStatisticMain: TPanel
-      Left = 7
+      Left = 19
       Top = 6
       Width = 516
-      Height = 349
+      Height = 345
       Anchors = [akLeft, akTop, akRight, akBottom]
       TabOrder = 0
-      DesignSize = (
-        516
-        349)
-      object sgaSb: TScrollBar
+      object mPbStatistic: TPaintBox
         Left = 1
-        Top = 331
+        Top = 1
         Width = 514
-        Height = 17
-        Align = alBottom
-        DoubleBuffered = False
-        Max = 400
-        PageSize = 50
-        ParentDoubleBuffered = False
-        TabOrder = 0
-        OnChange = sgaSbChange
-      end
-      object mPnStatistic: TPanel
-        Left = 0
-        Top = 0
-        Width = 467
-        Height = 333
-        Anchors = [akTop, akBottom]
-        BevelOuter = bvNone
-        TabOrder = 1
-        DesignSize = (
-          467
-          333)
-        object sga0: TGauge
-          Left = 12
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 9
-        end
-        object sga1: TGauge
-          Left = 57
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga2: TGauge
-          Left = 102
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga3: TGauge
-          Left = 147
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga4: TGauge
-          Left = 192
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga5: TGauge
-          Left = 237
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga6: TGauge
-          Left = 282
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga7: TGauge
-          Left = 327
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
-        object sga8: TGauge
-          Left = 372
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-          ExplicitHeight = 310
-        end
-        object sga9: TGauge
-          Left = 417
-          Top = 16
-          Width = 39
-          Height = 313
-          Anchors = [akLeft, akTop, akBottom]
-          BackColor = 4670451
-          BorderStyle = bsNone
-          ForeColor = 6273177
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Kind = gkVerticalBar
-          ParentFont = False
-          Progress = 60
-        end
+        Height = 343
+        Align = alClient
+        Color = clWhite
+        ParentColor = False
+        ExplicitLeft = 56
+        ExplicitTop = 71
+        ExplicitWidth = 264
+        ExplicitHeight = 150
       end
     end
   end

@@ -15,6 +15,10 @@ void User::GetSQLValues(AnsiString idUser)
 	password = cDBService.SqlGetOneParameter("User","Password","idUser = " + idUser);
 	creationDate = cDBService.SqlGetOneParameter("User","CreationDate","idUser = " + idUser);
 	username = cDBService.SqlGetOneParameter("User","Username","idUser = " + idUser);
+	totalWords = cDBService.SqlGetArrayInt("statistic","TotalWords","User_idUser",idUser);
+	precessedWords = cDBService.SqlGetArrayInt("statistic","precessedWords","User_idUser",idUser);
+	failedWords	= cDBService.SqlGetArrayInt("statistic","FailedWords","User_idUser",idUser);
+
 }
 
 void User::GetSQLValuesS(AnsiString surname)

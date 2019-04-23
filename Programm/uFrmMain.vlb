@@ -2,17 +2,14 @@
 Coordinates=379,166,88,36
 
 []
-Coordinates=76,155,101,124
+Coordinates=370,80,86,58
+LayerNames=NewLayer0
+Visible=True
 
 [Module Settings]
 ModelLayerNames=NewLayer0
 ActiveLayerNames=NewLayer0
 EditingLayerName=
-
-[mPnStatistic]
-Coordinates=370,80,86,58
-Visible=True
-LayerNames=NewLayer0
 
 [fbtLogin]
 Coordinates=75,10,61,58
@@ -23,18 +20,8 @@ Coordinates=144,10,82,58
 [fedLoginName]
 Coordinates=213,78,98,58
 
-[sga0]
-Coordinates=450,150,42,36
-LayerNames=NewLayer0
-
-[sga5]
-Coordinates=0,281,42,36
-
 [ulbVocLag]
 Coordinates=494,1,75,58
-
-[sga4]
-Coordinates=505,386,42,36
 
 [vgrbUnit]
 Coordinates=118,317,63,58
@@ -45,20 +32,11 @@ Coordinates=264,155,90,58
 [Hilfe1]
 Coordinates=456,413,48,36
 
-[sga2]
-Coordinates=407,413,42,36
-
-[sga9]
-Coordinates=358,413,42,36
-
 [N1]
 Coordinates=309,413,40,36
 
 [fMainMenu]
 Coordinates=626,1,78,36
-
-[sga3]
-Coordinates=260,413,42,36
 
 [ilb2]
 Coordinates=187,317,49,58
@@ -81,9 +59,6 @@ Coordinates=83,413,73,36
 [ilb1]
 Coordinates=59,317,49,58
 
-[sga6]
-Coordinates=34,413,42,36
-
 [mbtnStartVoc]
 Coordinates=264,1,92,58
 
@@ -92,9 +67,6 @@ Coordinates=264,78,65,58
 
 [ibtAddVoc]
 Coordinates=394,234,73,58
-
-[sga1]
-Coordinates=626,56,42,36
 
 [ilb3]
 Coordinates=394,157,49,58
@@ -123,17 +95,11 @@ Coordinates=394,311,71,58
 [uimUnit]
 Coordinates=394,1,58,58
 
-[sga7]
-Coordinates=626,166,42,36
-
 [ulbVocAn]
 Coordinates=246,317,69,58
 
 [Bearbeiten1]
 Coordinates=626,221,84,36
-
-[sga8]
-Coordinates=626,276,42,36
 
 [mgrbVoc]
 Coordinates=325,317,66,58

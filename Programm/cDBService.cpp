@@ -67,21 +67,24 @@ std::vector<AnsiString> cDBService::SqlGetArray(String Table,String Attribute,St
 
 	return returnList;
 }
-/*
-	 frmMain->mainADOQuery->Close();
-	 frmMain->mainADOQuery->SQL->Clear();
-	 frmMain->mainADOQuery->SQL->Add(SQL + " Where " + AttributeUser + " like '" + User + "' && " + AttributePassword + " = '" + Password + "'");
-	 frmMain->mainADOQuery->Open();
 
-	 AnsiString X;
+std::vector<int> cDBService::SqlGetArrayInt(String Table,String Attribute,String AttributeId,AnsiString Id)
+{
+	myLog.Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
+	frmMain->mainADOQuery->Close();
+	frmMain->mainADOQuery->SQL->Clear();
+	frmMain->mainADOQuery->SQL->Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
+	frmMain->mainADOQuery->Open();
 
-	 frmMain->mainADOQuery->First();
+	std::vector<int> returnList;
+
+	frmMain->mainADOQuery->First();
 
 
-	 for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
-		 X = frmMain->mainADOQuery->FieldByName("Surname")->AsAnsiString;
+	for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
+		returnList.push_back( frmMain->mainADOQuery->FieldByName(Attribute)->AsInteger);
+		frmMain->mainADOQuery->Next();
+	}
 
-		 Application->MessageBox(AnsiTowchar_t(X),L"Hallo",MB_OK);
-		 frmMain->mainADOQuery->Next();
-	 }
-*/
+	return returnList;
+}

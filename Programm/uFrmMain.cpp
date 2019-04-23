@@ -8,13 +8,14 @@
 #include "cDBService.h"
 #include "cUser.h"
 #include "cLogSystem.h"
+#include "cPaintbox.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfrmMain *frmMain;
 
 User *mainUser;
-
+PaintBox *mainPaintBox;
 //---------------------------------------------------------------------------
 __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 	: TForm(Owner)
@@ -22,7 +23,14 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-void UpdateUI(void)
+void TfrmMain::PlotStatistics(void)
+{
+	if (mainUser != NULL) {
+		mainPaintBox->drawStatistic(mainUser->get_totalWords(),mainUser->get_precessedWords(),mainUser->get_failedWords());
+	}
+}
+
+void TfrmMain::UpdateUI(void)
 {
 	//Set Combobox Items
 	frmMain->vcmbUnit->Items->Clear();
@@ -38,9 +46,12 @@ void UpdateUI(void)
 	frmMain->mlbStatisticF->Caption = "Fehlend: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 0","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
 	frmMain->mlbStatisticR->Caption = "Richtig: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 1","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
 	frmMain->mlbStatisticG->Caption = "Anzahl: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit", "group by User_idUser");
+
+	PlotStatistics();
+
 }
 
-void UpdateAfterLogin(void)
+void TfrmMain::UpdateAfterLogin(void)
 {
     //Set wellcome message
 	frmMain->flbLoginNot->Caption = "Willkommen " + mainUser->get_username();
@@ -56,6 +67,7 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 
 	if(tempUser)
 	{
+		delete mainUser;
 		mainUser = new User(tempUser);
 		UpdateAfterLogin();
 
@@ -67,18 +79,6 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 		Application->MessageBox(L"Benutzername oder Password Wing Wong",L"Anmeldung war nicht erfolgreich",MB_OK);
 		myLog.Add("Felgeschlagende Anmeldung User:" + fedLoginName->Text,1);
 	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TfrmMain::sgaSbChange(TObject *Sender)
-{
-	frmMain->mPnStatistic->Left =- frmMain->sgaSb->Position;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TfrmMain::FormResize(TObject *Sender)
-{
-	frmMain->sgaSb->Update();
 }
 //---------------------------------------------------------------------------
 
@@ -110,6 +110,8 @@ void __fastcall TfrmMain::FormShow(TObject *Sender)
 {
 	frmMain->Anschalten1->Checked = myLog.get_enableLog();
 	myLog.Add("---- Programm gestartet ----");
+
+	mainPaintBox = new PaintBox(frmMain->mPbStatistic);
 }
 //---------------------------------------------------------------------------
 
@@ -123,6 +125,12 @@ void __fastcall TfrmMain::Anschalten1Click(TObject *Sender)
 void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 {
 	myLog.Clear();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::FormPaint(TObject *Sender)
+{
+	PlotStatistics();
 }
 //---------------------------------------------------------------------------
 
