@@ -125,22 +125,34 @@
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="cDBService.cpp">
+            <VirtualFolder>{2706A8B5-4DA9-4B4A-99C4-4D449C81A930}</VirtualFolder>
             <DependentOn>cDBService.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
         <CppCompile Include="cLogSystem.cpp">
+            <VirtualFolder>{2706A8B5-4DA9-4B4A-99C4-4D449C81A930}</VirtualFolder>
             <DependentOn>cLogSystem.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="cPaintbox.cpp">
+            <VirtualFolder>{2706A8B5-4DA9-4B4A-99C4-4D449C81A930}</VirtualFolder>
             <DependentOn>cPaintbox.h</DependentOn>
             <BuildOrder>6</BuildOrder>
         </CppCompile>
         <CppCompile Include="cUser.cpp">
+            <VirtualFolder>{2706A8B5-4DA9-4B4A-99C4-4D449C81A930}</VirtualFolder>
             <DependentOn>cUser.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="uFrmAddVoc.cpp">
+            <VirtualFolder>{719CCDCB-F174-4B8B-9AB1-FD03227E4966}</VirtualFolder>
+            <Form>frmAddVoc</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>uFrmAddVoc.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <CppCompile Include="uFrmMain.cpp">
+            <VirtualFolder>{719CCDCB-F174-4B8B-9AB1-FD03227E4966}</VirtualFolder>
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
             <DependentOn>uFrmMain.h</DependentOn>
@@ -154,6 +166,7 @@
             <PCH>true</PCH>
         </PCHCompile>
         <FormResources Include="uFrmMain.dfm"/>
+        <FormResources Include="uFrmAddVoc.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -184,6 +197,11 @@
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder-Package für Office 2000-Server</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder-Package für Office XP-Server</Excluded_Packages>
                 </Excluded_Packages>
+                <Folders/>
+                <VFOLDERS>
+                    <VFOLDER ID="{2706A8B5-4DA9-4B4A-99C4-4D449C81A930}" name="Classes"/>
+                    <VFOLDER ID="{719CCDCB-F174-4B8B-9AB1-FD03227E4966}" name="Forms"/>
+                </VFOLDERS>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">

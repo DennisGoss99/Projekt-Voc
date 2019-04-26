@@ -68,6 +68,27 @@ std::vector<AnsiString> cDBService::SqlGetArray(String Table,String Attribute,St
 	return returnList;
 }
 
+std::vector<AnsiString> cDBService::SqlGetArray(String Table,String Attribute,String Where)
+{
+	myLog.Add("Select * from "+ Table + " " + Where);
+	frmMain->mainADOQuery->Close();
+	frmMain->mainADOQuery->SQL->Clear();
+	frmMain->mainADOQuery->SQL->Add("Select * from "+ Table + " " + Where );
+	frmMain->mainADOQuery->Open();
+
+	std::vector<AnsiString> returnList;
+
+	frmMain->mainADOQuery->First();
+
+
+	for (int i = 0; i < frmMain->mainADOQuery->RecordCount; i++) {
+		returnList.push_back( frmMain->mainADOQuery->FieldByName(Attribute)->AsAnsiString);
+		frmMain->mainADOQuery->Next();
+	}
+
+	return returnList;
+}
+
 std::vector<int> cDBService::SqlGetArrayInt(String Table,String Attribute,String AttributeId,AnsiString Id)
 {
 	myLog.Add("Select * from "+ Table + " Where " + AttributeId + " like '" + Id + "'");
@@ -87,4 +108,13 @@ std::vector<int> cDBService::SqlGetArrayInt(String Table,String Attribute,String
 	}
 
 	return returnList;
+}
+
+int cDBService::SqlExeq(AnsiString SQL)
+{
+    myLog.Add(SQL);
+	frmMain->mainADOQuery->Close();
+	frmMain->mainADOQuery->SQL->Clear();
+	frmMain->mainADOQuery->SQL->Add(SQL);
+	return frmMain->mainADOQuery->ExecSQL();
 }

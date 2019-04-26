@@ -179,6 +179,7 @@ object frmMain: TfrmMain
         Font.Quality = fqProof
         ParentFont = False
         TabOrder = 0
+        OnClick = ibtAddVocClick
       end
     end
     object mgrbVoc: TGroupBox
@@ -350,6 +351,13 @@ object frmMain: TfrmMain
       Caption = '&Hilfe'
       object Log1: TMenuItem
         Caption = 'Log'
+        object ffnen1: TMenuItem
+          Caption = #214'ffnen'
+          OnClick = ffnen1Click
+        end
+        object N3: TMenuItem
+          Caption = '-'
+        end
         object Leeren1: TMenuItem
           Caption = 'Leeren'
           OnClick = Leeren1Click

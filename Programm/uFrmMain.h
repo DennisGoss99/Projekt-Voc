@@ -16,6 +16,12 @@
 #include <Vcl.BaseImageCollection.hpp>
 #include <Vcl.ImageCollection.hpp>
 
+#include "cDBService.h"
+#include "cUser.h"
+#include "cLogSystem.h"
+#include "cPaintbox.h"
+#include "uFrmAddVoc.h"
+
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {
@@ -68,6 +74,8 @@ __published:	// Von der IDE verwaltete Komponenten
 	TMenuItem *Leeren1;
 	TMenuItem *Anschalten1;
 	TPaintBox *mPbStatistic;
+	TMenuItem *ffnen1;
+	TMenuItem *N3;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
@@ -76,6 +84,8 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall Anschalten1Click(TObject *Sender);
 	void __fastcall Leeren1Click(TObject *Sender);
 	void __fastcall FormPaint(TObject *Sender);
+	void __fastcall ibtAddVocClick(TObject *Sender);
+	void __fastcall ffnen1Click(TObject *Sender);
 
 
 
@@ -83,6 +93,9 @@ __published:	// Von der IDE verwaltete Komponenten
 
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
+
+	User *mainUser;
+
 	__fastcall TfrmMain(TComponent* Owner);
 	void PlotStatistics(void);
 	void UpdateUI(void);

@@ -5,16 +5,12 @@
 #pragma hdrstop
 
 #include "uFrmMain.h"
-#include "cDBService.h"
-#include "cUser.h"
-#include "cLogSystem.h"
-#include "cPaintbox.h"
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TfrmMain *frmMain;
 
-User *mainUser;
 PaintBox *mainPaintBox;
 //---------------------------------------------------------------------------
 __fastcall TfrmMain::TfrmMain(TComponent* Owner)
@@ -71,7 +67,8 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 		mainUser = new User(tempUser);
 		UpdateAfterLogin();
 
-		Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
+		//Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
+		frmAddVoc->Show();
 		myLog.Add("Anmeldung User:" + fedLoginName->Text,1);
 
 	}else
@@ -131,6 +128,19 @@ void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 void __fastcall TfrmMain::FormPaint(TObject *Sender)
 {
 	PlotStatistics();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::ibtAddVocClick(TObject *Sender)
+{
+    frmAddVoc->Show();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
+{
+	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
 }
 //---------------------------------------------------------------------------
 
