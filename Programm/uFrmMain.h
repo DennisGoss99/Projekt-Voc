@@ -12,38 +12,34 @@
 #include <Vcl.Samples.Gauges.hpp>
 #include <Data.DB.hpp>
 #include <Data.Win.ADODB.hpp>
-#include "Unit1.h"
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
+
+#include "cDBService.h"
+#include "cUser.h"
+#include "cLogSystem.h"
+#include "cPaintbox.h"
+#include "uFrmAddVoc.h"
+
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {
 __published:	// Von der IDE verwaltete Komponenten
-	TPanel *fPnMain;
 	TEdit *fedLoginName;
 	TEdit *fedLoginPw;
 	TButton *fbtLogin;
-	TGauge *sga0;
-	TPanel *mPnStatistic;
 	TLabel *mlbStatisticG;
 	TLabel *mlbStatisticR;
 	TLabel *mlbStatisticF;
 	TGroupBox *mgrbVoc;
 	TButton *mbtnStartVoc;
-	TComboBox *vcbUnit;
 	TImage *uimUnit;
 	TLabel *ulbVocLag;
 	TLabel *ulbVocAn;
 	TLabel *ulbVocBea;
 	TGroupBox *vgrbUnit;
 	TLabel *ulbVocOp;
-	TGauge *sga1;
-	TGauge *sga2;
-	TGauge *sga3;
-	TGauge *sga4;
-	TGauge *sga5;
-	TGauge *sga6;
-	TGauge *sga7;
-	TGauge *sga8;
-	TGauge *sga9;
 	TGroupBox *mgrbInfo;
 	TLabel *ilb0;
 	TLabel *ilb1;
@@ -64,11 +60,46 @@ __published:	// Von der IDE verwaltete Komponenten
 	TLabel *flbLoginPw;
 	TLabel *flbLoginName;
 	TLabel *flbLoginNot;
-	TADOConnection *ADOConnection1;
+	TADOConnection *mainADOConnection;
+	TDataSource *mainDataSource;
+	TADOQuery *mainADOQuery;
+	TPanel *fPnMainRight;
+	TPanel *fPnMainLeft;
+	TPanel *fPnMainTop;
+	TSplitter *Splitter1;
+	TPanel *mPnStatisticMain;
+	TComboBox *vcmbUnit;
+	TImageCollection *mainImageCollection;
+	TMenuItem *Log1;
+	TMenuItem *Leeren1;
+	TMenuItem *Anschalten1;
+	TPaintBox *mPbStatistic;
+	TMenuItem *ffnen1;
+	TMenuItem *N3;
+	void __fastcall fbtLoginClick(TObject *Sender);
+	void __fastcall Beenden1Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall vcmbUnitChange(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall Anschalten1Click(TObject *Sender);
+	void __fastcall Leeren1Click(TObject *Sender);
+	void __fastcall FormPaint(TObject *Sender);
+	void __fastcall ibtAddVocClick(TObject *Sender);
+	void __fastcall ffnen1Click(TObject *Sender);
+
+
+
+
+
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
+
+	User *mainUser;
+
 	__fastcall TfrmMain(TComponent* Owner);
+	void PlotStatistics(void);
+	void UpdateUI(void);
+	void UpdateAfterLogin(void);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

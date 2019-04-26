@@ -7,7 +7,7 @@
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
 USEFORM("uFrmMain.cpp", frmMain);
-USEFORM("Unit1.cpp", Form1);
+USEFORM("uFrmAddVoc.cpp", frmAddVoc);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -17,7 +17,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->MainFormOnTaskBar = true;
 		TStyleManager::TrySetStyle("Smokey Quartz Kamri");
 		Application->CreateForm(__classid(TfrmMain), &frmMain);
-		Application->CreateForm(__classid(TForm1), &Form1);
+		Application->CreateForm(__classid(TfrmAddVoc), &frmAddVoc);
 		Application->Run();
 	}
 	catch (Exception &exception)

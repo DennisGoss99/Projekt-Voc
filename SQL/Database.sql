@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `VocTrainer`.`User` (
   `idUser` INT NOT NULL AUTO_INCREMENT,
   `Surname` VARCHAR(45) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
+  `Username` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NULL,
   `CreationDate` DATE NOT NULL,
@@ -71,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `VocTrainer`.`Vocabulary` (
   `Word` VARCHAR(100) NOT NULL,
   `WordTranslated` VARCHAR(100) NOT NULL,
   `IsFinished` TINYINT NOT NULL DEFAULT 0,
+  `Glossary` VARCHAR(100) NOT NULL,
   `Unit_idUnit` INT NOT NULL,
   PRIMARY KEY (`idVocabulary`),
     FOREIGN KEY (`Unit_idUnit`)
