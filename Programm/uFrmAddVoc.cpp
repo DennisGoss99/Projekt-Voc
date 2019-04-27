@@ -378,7 +378,7 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 	cDBService.SqlExeq("Delete from Vocabulary Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' &&( Word not in "+ ListToWhereString(lbVocNT) + "|| WordTranslated not in "+ ListToWhereString(lbVocT)+ "|| Glossary not in "+ ListToWhereString(lbGlos) + ")");
 
 	for (int i = 0; i < lbVocNT->Items->Count -1; i++) {
-			cDBService.SqlExeq("Insert into vocabulary (Word,WordTranslated,Glossary,Unit_idUnit) Select * from (Select '"+ lbVocNT->Items->Strings[i] +"','"+ lbVocT->Items->Strings[i] +"','"+ lbGlos->Items->Strings[i] +"','"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' ) AS tmp Where NOT EXISTS(Select Word from vocabulary Where word = '"+ lbVocNT->Items->Strings[i] +"') || NOT EXISTS(Select WordTranslated from vocabulary Where WordTranslated = '"+ lbVocT->Items->Strings[i] +"') || NOT EXISTS(Select Glossary from vocabulary Where Glossary = '"+ lbGlos->Items->Strings[i] +"')");
+			cDBService.SqlExeq("Insert into vocabulary (Word,WordTranslated,IsFinished,Glossary,Unit_idUnit) Select * from (Select '"+ lbVocNT->Items->Strings[i] +"','"+ lbVocT->Items->Strings[i] +"', '-1' ,'"+ lbGlos->Items->Strings[i] +"','"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' ) AS tmp Where NOT EXISTS(Select Word from vocabulary Where word = '"+ lbVocNT->Items->Strings[i] +"') || NOT EXISTS(Select WordTranslated from vocabulary Where WordTranslated = '"+ lbVocT->Items->Strings[i] +"') || NOT EXISTS(Select Glossary from vocabulary Where Glossary = '"+ lbGlos->Items->Strings[i] +"')");
 	}
 
 	frmMain->UpdateUI();

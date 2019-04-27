@@ -68,8 +68,26 @@ void TfrmMain::UpdateAfterLogin(void)
 
 void TfrmMain::UpdateStatistic(void)
 {
+	AnsiString FailedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 0","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+	AnsiString PrecessedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 1","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+	AnsiString TotalWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit", "group by User_idUser");
+	AnsiString TotalUnits = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)");
 
+	cDBService.SqlExeq("Insert Into Statistic (LastVisite , TotalWords , TotalUnits , precessedWords , FailedWords , User_idUser) values (now(),'"+ TotalWords +"','"+ TotalUnits +"','"+ PrecessedWords +"','"+ FailedWords +"','"+ mainUser->get_idUser() +"')");
 }
+
+//---------------------------------------------------------------------------
+//Unit Functions
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::FormShow(TObject *Sender)
+{
+	frmMain->Anschalten1->Checked = myLog.get_enableLog();
+	myLog.Add("---- Programm gestartet ----");
+
+	mainPaintBox = new PaintBox(frmMain->mPbStatistic);
+}
+//---------------------------------------------------------------------------
 
 void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 {
@@ -93,18 +111,6 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TfrmMain::Beenden1Click(TObject *Sender)
-{
-    frmMain->Close();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TfrmMain::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	delete mainUser;
-}
-//---------------------------------------------------------------------------
-
 void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 {
 	frmMain->uimUnit->Picture->Bitmap->Assign( mainImageCollection->GetBitmap(cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage"),80,48));
@@ -114,28 +120,6 @@ void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 	frmMain->ulbVocBea->Caption = "Vokabeln bearbeitet: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 1", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
 	frmMain->ulbVocOp->Caption = "Vokabeln offen: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 0", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
 	frmMain->ulbVocTim->Caption = "Letzte Bearbeitung: " + cDBService.SqlGetOneParameter("Unit","LastEdit","UnitName = '" + frmMain->vcmbUnit->Text+ "'");
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TfrmMain::FormShow(TObject *Sender)
-{
-	frmMain->Anschalten1->Checked = myLog.get_enableLog();
-	myLog.Add("---- Programm gestartet ----");
-
-	mainPaintBox = new PaintBox(frmMain->mPbStatistic);
-}
-//---------------------------------------------------------------------------
-
-
-void __fastcall TfrmMain::Anschalten1Click(TObject *Sender)
-{
-	myLog.set_enableLog(frmMain->Anschalten1->Checked);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
-{
-	myLog.Clear();
 }
 //---------------------------------------------------------------------------
 
@@ -150,14 +134,6 @@ void __fastcall TfrmMain::ibtAddVocClick(TObject *Sender)
     frmAddVoc->Show();
 }
 //---------------------------------------------------------------------------
-
-
-void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
-{
-	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
-}
-//---------------------------------------------------------------------------
-
 
 void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 {
@@ -175,3 +151,34 @@ void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TfrmMain::FormClose(TObject *Sender, TCloseAction &Action)
+{
+    UpdateStatistic();
+	delete mainUser;
+}
+//---------------------------------------------------------------------------
+// Menu Functions
+//---------------------------------------------------------------------------
+
+ void __fastcall TfrmMain::Beenden1Click(TObject *Sender)
+{
+	frmMain->Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Anschalten1Click(TObject *Sender)
+{
+	myLog.set_enableLog(frmMain->Anschalten1->Checked);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
+{
+	myLog.Clear();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
+{
+	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
+}
+//---------------------------------------------------------------------------

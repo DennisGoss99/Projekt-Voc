@@ -41,6 +41,8 @@ void TfrmCheckVoc::CheckVoc(void)
 		mVocT->Font->Color = clRed;
 		mVocT->Text += "\r\n" + UnitWordTranslated[randomIndex];
 		imCheck->Picture->Bitmap->Assign( ImageCollectionCheckbox->GetBitmap("Red Cross",40,40));
+
+		cDBService.SqlExeq("Update Vocabulary Set IsFinished = 0 Were WordTranslated = '"+ UnitWordTranslated[randomIndex] +"' && Word = '"+ UnitWord[randomIndex] +"' && Glossary = '"+ UnitGlossary[randomIndex] +"' && Unit_idUnit ='"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"'" );
 	}
 
 	UnitWordTranslated.erase(UnitWordTranslated.begin()+randomIndex );
@@ -79,7 +81,7 @@ void TfrmCheckVoc::UpdateUI(void)
 {
 	lbUnit->Caption = "Unit: " + SelectedUnit;
 	lbUnitDescription->Caption = "Noch zu bearbeitung offen: [ "+ (AnsiString)UnitWord.size() + " ]";
-}           //Select  from vocabulary  Where ;
+}
 
 __fastcall TfrmCheckVoc::TfrmCheckVoc(TComponent* Owner)
 	: TForm(Owner)
