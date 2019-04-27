@@ -263,8 +263,6 @@ void __fastcall TfrmAddVoc::btnVocDelClick(TObject *Sender)
 	edVocT->Text = "";
 	edGlos->Text = "";
 
-    //Todo: Delete
-
 }
 //---------------------------------------------------------------------------
 

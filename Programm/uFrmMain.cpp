@@ -68,7 +68,6 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 		UpdateAfterLogin();
 
 		//Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
-		frmAddVoc->Show();
 		myLog.Add("Anmeldung User:" + fedLoginName->Text,1);
 
 	}else
@@ -141,6 +140,13 @@ void __fastcall TfrmMain::ibtAddVocClick(TObject *Sender)
 void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 {
 	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
+{
+    frmCheckVoc->Show();
 }
 //---------------------------------------------------------------------------
 
