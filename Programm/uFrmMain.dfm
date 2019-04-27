@@ -115,6 +115,7 @@ object frmMain: TfrmMain
       Anchors = [akLeft, akRight, akBottom]
       Caption = 'Start Vokabeln'
       TabOrder = 0
+      OnClick = mbtnStartVocClick
     end
     object mgrbInfo: TGroupBox
       Left = 8

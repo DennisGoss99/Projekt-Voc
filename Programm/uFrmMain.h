@@ -21,6 +21,7 @@
 #include "cLogSystem.h"
 #include "cPaintbox.h"
 #include "uFrmAddVoc.h"
+#include "uFrmCheckVoc.h"
 
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
@@ -86,6 +87,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall FormPaint(TObject *Sender);
 	void __fastcall ibtAddVocClick(TObject *Sender);
 	void __fastcall ffnen1Click(TObject *Sender);
+	void __fastcall mbtnStartVocClick(TObject *Sender);
 
 
 
