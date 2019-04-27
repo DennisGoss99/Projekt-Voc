@@ -14,7 +14,7 @@ wchar_t * cDBService::AnsiTowchar_t(AnsiString Str)
 {
 	wchar_t *str = new wchar_t[Str.WideCharBufSize()];
 	return Str.WideChar(str, Str.WideCharBufSize());
-	delete str;
+	delete[] str;
 }
 
 AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String Where,String Star,String InnerJoin,String GroupBy)

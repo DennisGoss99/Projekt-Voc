@@ -9,6 +9,10 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <vector>
+
+#include "cDBService.h"
+#include "uFrmMain.h"
+
 //---------------------------------------------------------------------------
 class TfrmAddVoc : public TForm
 {

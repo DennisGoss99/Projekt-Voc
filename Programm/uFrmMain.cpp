@@ -26,7 +26,7 @@ void TfrmMain::PlotStatistics(void)
 	}
 }
 
-void TfrmMain::UpdateUI(void)
+void TfrmMain::UpdateUI(int SelectUnit)
 {
 	//Set Combobox Items
 	frmMain->vcmbUnit->Items->Clear();
@@ -38,10 +38,20 @@ void TfrmMain::UpdateUI(void)
 		frmMain->vcmbUnit->Items->Add(tempList[i]);
 	}
 
+	frmMain->vcmbUnit->ItemIndex = SelectUnit;
+
 	// Shows overall Vocabulary Statistics
 	frmMain->mlbStatisticF->Caption = "Fehlend: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 0","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
 	frmMain->mlbStatisticR->Caption = "Richtig: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 1","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
 	frmMain->mlbStatisticG->Caption = "Anzahl: " + cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit", "group by User_idUser");
+
+	frmMain->uimUnit->Picture->Bitmap->Assign( mainImageCollection->GetBitmap(cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage"),80,48));
+	frmMain->vgrbUnit->Caption = "Unit: " + frmMain->vcmbUnit->Text;
+	frmMain->ulbVocLag->Caption ="Sprache: " + cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
+	frmMain->ulbVocAn->Caption  ="Anzahl Vokabeln: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+	frmMain->ulbVocBea->Caption = "Vokabeln bearbeitet: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 1", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
+	frmMain->ulbVocOp->Caption = "Vokabeln offen: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 0", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
+	frmMain->ulbVocTim->Caption = "Letzte Bearbeitung: " + cDBService.SqlGetOneParameter("Unit","LastEdit","UnitName = '" + frmMain->vcmbUnit->Text+ "'");
 
 	PlotStatistics();
 
@@ -54,6 +64,11 @@ void TfrmMain::UpdateAfterLogin(void)
 	frmMain->fPnMainLeft->Enabled = true;
 
 	UpdateUI();
+}
+
+void TfrmMain::UpdateStatistic(void)
+{
+
 }
 
 void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
@@ -146,7 +161,17 @@ void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 
 void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 {
-    frmCheckVoc->Show();
+	if (! (vcmbUnit->ItemIndex >= 0)){
+	myLog.OutputError("Bitte wählen Sie eine Unit aus!", "Keine Eingabe" ,MB_OK);
+	return;
+	}
+
+	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0", "count(idVocabulary)" ))
+		cDBService.SqlExeq("Update Vocabulary Set Isfinished = 0 Where Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"'");
+
+
+	frmCheckVoc->Show();
+	frmMain->UpdateUI(vcmbUnit->ItemIndex);
 }
 //---------------------------------------------------------------------------
 

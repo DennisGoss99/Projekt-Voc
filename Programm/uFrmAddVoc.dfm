@@ -206,7 +206,6 @@ object frmAddVoc: TfrmAddVoc
       Align = alRight
       Caption = 'Glossar'
       TabOrder = 2
-      ExplicitTop = 10
       DesignSize = (
         144
         147)

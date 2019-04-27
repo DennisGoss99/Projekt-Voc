@@ -71,3 +71,9 @@ void Log::Add(AnsiString LogContent,int Priority)
 
 	getch();
 }
+
+
+void Log::OutputError(AnsiString Text ,AnsiString Caption , int Flag , bool DoLog){
+	if (DoLog) Add("Messagebox: " + Text + " | Caption: " + Caption);
+	Application->MessageBox(cDBService.AnsiTowchar_t(Text),cDBService.AnsiTowchar_t(Caption),Flag);
+}

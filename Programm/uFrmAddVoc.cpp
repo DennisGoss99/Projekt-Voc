@@ -4,8 +4,7 @@
 #pragma hdrstop
 
 #include "uFrmAddVoc.h"
-#include "cDBService.h"
-#include "uFrmMain.h"
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -147,7 +146,7 @@ void __fastcall TfrmAddVoc::edUnitNameChange(TObject *Sender)
 void __fastcall TfrmAddVoc::btnUnitDelClick(TObject *Sender)
 {
 
-	if(Application->MessageBox(L"Wollen Sie diese Unit wirklich löschen?",L"Sind Sie sich sicher?",MB_OKCANCEL) == 2)return;
+	if(Application->MessageBox(L"Wollen Sie diese Unit wirklich loeschen?",L"Sind Sie sich sicher?",MB_OKCANCEL) == 2)return;
 
 	cDBService.SqlExeq("Delete Vocabulary from Unit inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit Where User_idUser = '" + (AnsiString)frmMain->mainUser->get_idUser() + "' && Unitname = '"+ cmbUnit->Text +"'");
 
@@ -347,7 +346,7 @@ void __fastcall TfrmAddVoc::btnCloseClick(TObject *Sender)
 void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 {
 	if (cmbUnit->Text == "-- hinzufügen -- ") {
-		Application->MessageBox(L"Bitte ändern Sie den Unitnamen!",L"Falsche Eingabe",MB_OK);
+		Application->MessageBox(L"Bitte aendern Sie den Unitnamen!",L"Falsche Eingabe",MB_OK);
 		myLog.Add("Nicht erlaubter Unitname!",2);
 		return;
 	}
@@ -372,10 +371,9 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 		return;
 		}
 
-		cDBService.SqlExeq("INSERT INTO Unit (IdUnit, UnitName, User_IdUser,Language_IdLanguage) VALUES (default, '"+ edUnitName->Text +"','" + frmMain->mainUser->get_idUser() +"' , '"+ cDBService.SqlGetOneParameter("Language", "IdLanguage", "language = '"+ cmbUnitLang->Text +"'") +"' )");
+		cDBService.SqlExeq("INSERT INTO Unit (IdUnit, UnitName, LastEdit, User_IdUser,Language_IdLanguage) VALUES (default, '"+ edUnitName->Text +"', now() ,'" + frmMain->mainUser->get_idUser() +"' , '"+ cDBService.SqlGetOneParameter("Language", "IdLanguage", "language = '"+ cmbUnitLang->Text +"'") +"' )");
 
     }
-
 
 	cDBService.SqlExeq("Delete from Vocabulary Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' &&( Word not in "+ ListToWhereString(lbVocNT) + "|| WordTranslated not in "+ ListToWhereString(lbVocT)+ "|| Glossary not in "+ ListToWhereString(lbGlos) + ")");
 
@@ -385,7 +383,7 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 
 	frmMain->UpdateUI();
 
-	if(Application->MessageBox(L"Wollen Sie das Fenster nun schließen?",L"Erfolgreich gespeichert!",MB_OKCANCEL) == 1)this->Close();
+	if(Application->MessageBox(L"Wollen Sie das Fenster nun schliessen?",L"Erfolgreich gespeichert!",MB_OKCANCEL) == 1)this->Close();
 
 }
 

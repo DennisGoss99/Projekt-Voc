@@ -100,8 +100,9 @@ public:		// Benutzer-Deklarationen
 
 	__fastcall TfrmMain(TComponent* Owner);
 	void PlotStatistics(void);
-	void UpdateUI(void);
+	void UpdateUI(int SelectUnit = -1);
 	void UpdateAfterLogin(void);
+    void UpdateStatistic(void);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

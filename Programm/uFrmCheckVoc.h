@@ -10,6 +10,9 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.BaseImageCollection.hpp>
 #include <Vcl.ImageCollection.hpp>
+#include "cLogSystem.h"
+#include <vector>
+#include <time.h>
 //---------------------------------------------------------------------------
 class TfrmCheckVoc : public TForm
 {
@@ -18,9 +21,9 @@ __published:	// Von der IDE verwaltete Komponenten
 	TPanel *Panel2;
 	TPanel *pnVoc;
 	TButton *btnShowGlos;
-	TLabel *Label1;
-	TLabel *Label2;
-	TImage *Image1;
+	TLabel *lbUnit;
+	TLabel *lbUnitDescription;
+	TImage *imCheck;
 	TButton *btnCheck;
 	TButton *btnCancel;
 	TGroupBox *grbVocNT;
@@ -35,12 +38,26 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall btnShowGlosClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall btnCancelClick(TObject *Sender);
+	void __fastcall btnCheckClick(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 
 	bool showGloss = false;
+
+
+	AnsiString SelectedUnit;
+
+    int randomIndex;
+	std::vector<AnsiString> UnitWord;
+	std::vector<AnsiString> UnitWordTranslated;
+	std::vector<AnsiString> UnitGlossary;
+
+	void NewVoc(void);
     void ToggleGlos(void);
 	void SetGlos(bool showGloss);
+	void UpdateUI(void);
+    void CheckVoc(void);
 
 	__fastcall TfrmCheckVoc(TComponent* Owner);
 };
