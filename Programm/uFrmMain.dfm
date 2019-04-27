@@ -14,6 +14,7 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poDesigned
   OnClose = FormClose
+  OnConstrainedResize = FormConstrainedResize
   OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,7 +23,7 @@ object frmMain: TfrmMain
     Left = 337
     Top = 35
     Height = 394
-    Color = clBackground
+    Color = clScrollBar
     ParentColor = False
     ExplicitLeft = 344
     ExplicitTop = 120

@@ -125,7 +125,7 @@ void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 
 void __fastcall TfrmMain::FormPaint(TObject *Sender)
 {
-	PlotStatistics();
+	//PlotStatistics();
 }
 //---------------------------------------------------------------------------
 
@@ -177,8 +177,25 @@ void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 	myLog.Clear();
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 {
 	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
 }
 //---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+void __fastcall TfrmMain::FormConstrainedResize(TObject *Sender, int &MinWidth, int &MinHeight,
+          int &MaxWidth, int &MaxHeight)
+{
+	PlotStatistics();
+}
+//---------------------------------------------------------------------------
+

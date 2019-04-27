@@ -26,8 +26,7 @@ void TfrmCheckVoc::NewVoc(void)
 	mVocNT->Text = UnitWord[randomIndex];
     mVocT->Text = "";
 	mGlos->Text = UnitGlossary[randomIndex];
-
-
+	mVocT->Font->Color = clBlack;
 }
 
 void TfrmCheckVoc::CheckVoc(void)
@@ -42,7 +41,7 @@ void TfrmCheckVoc::CheckVoc(void)
 		mVocT->Text += "\r\n" + UnitWordTranslated[randomIndex];
 		imCheck->Picture->Bitmap->Assign( ImageCollectionCheckbox->GetBitmap("Red Cross",40,40));
 
-		cDBService.SqlExeq("Update Vocabulary Set IsFinished = 0 Were WordTranslated = '"+ UnitWordTranslated[randomIndex] +"' && Word = '"+ UnitWord[randomIndex] +"' && Glossary = '"+ UnitGlossary[randomIndex] +"' && Unit_idUnit ='"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"'" );
+		cDBService.SqlExeq("Update Vocabulary Set IsFinished = 0 Where WordTranslated = '"+ UnitWordTranslated[randomIndex] +"' && Word = '"+ UnitWord[randomIndex] +"' && Glossary = '"+ UnitGlossary[randomIndex] +"' && Unit_idUnit ='"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"'" );
 	}
 
 	UnitWordTranslated.erase(UnitWordTranslated.begin()+randomIndex );

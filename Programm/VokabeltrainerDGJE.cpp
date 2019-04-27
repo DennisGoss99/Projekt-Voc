@@ -16,7 +16,6 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
-		TStyleManager::TrySetStyle("Smokey Quartz Kamri");
 		Application->CreateForm(__classid(TfrmMain), &frmMain);
 		Application->CreateForm(__classid(TfrmAddVoc), &frmAddVoc);
 		Application->CreateForm(__classid(TfrmCheckVoc), &frmCheckVoc);

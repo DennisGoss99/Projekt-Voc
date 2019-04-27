@@ -88,6 +88,9 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall ibtAddVocClick(TObject *Sender);
 	void __fastcall ffnen1Click(TObject *Sender);
 	void __fastcall mbtnStartVocClick(TObject *Sender);
+	void __fastcall FormConstrainedResize(TObject *Sender, int &MinWidth, int &MinHeight,
+          int &MaxWidth, int &MaxHeight);
+
 
 
 

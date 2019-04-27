@@ -14,10 +14,16 @@ void PaintBox::drawStatistic(std::vector<int> totalWords, std::vector<int> prece
 
 	float biggestValue = 0;
 	const static int paintBoxTop = 10;
+	const static int StartSpacer = 20;
 	const static int spacer = 5;
 	const static int columnsWidth = 15;
 	int paintBoxHight = graph->Height - 15;
 	int paintBoxHight2 = paintBoxHight - paintBoxTop;
+
+	int echelon = 6;
+
+	graph->Canvas->MoveTo(StartSpacer -2, this->graph->Height - spacer);
+	graph->Canvas->LineTo(StartSpacer -2, spacer);
 
 	graph->Canvas->MoveTo(spacer,paintBoxHight + 1);
 	graph->Canvas->LineTo(this->graph->Width - spacer, paintBoxHight +1);
@@ -38,13 +44,20 @@ void PaintBox::drawStatistic(std::vector<int> totalWords, std::vector<int> prece
 		float tempTotalWords =  (1 /(float)biggestValue) * (float)(totalWords[i]-(precessedWords[i]+failedWords[i]));
 
 		//draw Failed
-		drawRectangle((columnsWidth * i ) + (spacer * (i+1)),paintBoxHight,(columnsWidth * (i+1) ) + (spacer * (i+1)),paintBoxHight - round (paintBoxHight2 * tempFailedWords),clRed);
+		drawRectangle((columnsWidth * i ) + (spacer * i)+StartSpacer,paintBoxHight,(columnsWidth * (i+1) ) + (spacer * i)+StartSpacer,paintBoxHight - round (paintBoxHight2 * tempFailedWords),clRed);
 		//draw Precessed
-		drawRectangle((columnsWidth * i ) + (spacer * (i+1)),paintBoxHight - round (paintBoxHight2 * tempFailedWords),(columnsWidth * (i+1) ) + (spacer * (i+1)),paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords)),clLime);
+		drawRectangle((columnsWidth * i ) + (spacer * i)+StartSpacer,paintBoxHight - round (paintBoxHight2 * tempFailedWords),(columnsWidth * (i+1) ) + (spacer * i)+StartSpacer,paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords)),clLime);
 		//draw totalWords
-		drawRectangle((columnsWidth * i ) + (spacer * (i+1)),paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords)),(columnsWidth * (i+1) ) + (spacer * (i+1)),paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords+tempTotalWords)),clSkyBlue);
+		drawRectangle((columnsWidth * i ) + (spacer * i)+StartSpacer,paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords)),(columnsWidth * (i+1) ) + (spacer * i)+StartSpacer,paintBoxHight - round (paintBoxHight2 * (tempFailedWords+tempPrecessedWords+tempTotalWords)),clSkyBlue);
 
-		this->graph->Canvas->TextOut((columnsWidth * i ) + (spacer * (i+1)) , paintBoxHight + 3,(UnicodeString)i);
+		this->graph->Canvas->TextOut((columnsWidth * i ) + (spacer * i)+StartSpacer+2 , paintBoxHight + 3,(UnicodeString)i);
+	}
+
+
+
+	for (int i = 0; i < (echelon+1); i++) {
+
+		this->graph->Canvas->TextOut(1 , (paintBoxHight -13) * ((float)i/echelon) ,(UnicodeString)round(biggestValue * ((float)((i-echelon)*(-1))/echelon)));
 	}
 }
 
