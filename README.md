@@ -17,5 +17,4 @@ Nach dem einloggen sehen sie automatisch auf der rechten Seite Ihre Statistik,  
 #### Vokabeln und Untis bearbeiten
 
 Mit dem Button -_____- öffnet sich ein neues Form, in welchem sie Ihre Units bearbeiten können ode rauch löschen.  
-
 Um eine Unit zu Löschen, wählen sie die zulöschende Unit aus und drücken sie oben Rechts auf das X.
