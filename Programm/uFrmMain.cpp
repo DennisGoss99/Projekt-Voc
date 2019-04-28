@@ -163,7 +163,7 @@ void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 	return;
 	}
 
-	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0", "count(idVocabulary)" ))
+	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0 || Isfinished = -1", "count(idVocabulary)" ))
 		cDBService.SqlExeq("Update Vocabulary Set Isfinished = 0 Where Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"'");
 
 

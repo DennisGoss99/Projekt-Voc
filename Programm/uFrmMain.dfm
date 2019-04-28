@@ -388,8 +388,8 @@ object frmMain: TfrmMain
   end
   object mainADOConnection: TADOConnection
     ConnectionString = 
-      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=DataV' +
-      'oc;'
+      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=VOKAB' +
+      'ELTRAINER'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
     Left = 193

@@ -106,7 +106,7 @@ object frmCheckVoc: TfrmCheckVoc
       Width = 75
       Height = 25
       Anchors = [akRight, akBottom]
-      Caption = #220'berpr'#252'fen'
+      Caption = 'Kontrollieren'
       TabOrder = 1
       OnClick = btnCheckClick
     end
