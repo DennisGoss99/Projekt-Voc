@@ -18,3 +18,11 @@ Nach dem einloggen sehen sie automatisch auf der rechten Seite Ihre Statistik,  
 
 Mit dem Button -_____- öffnet sich ein neues Form, in welchem sie Ihre Units bearbeiten können ode rauch löschen.  
 Um eine Unit zu Löschen, wählen sie die zulöschende Unit aus und drücken sie oben Rechts auf das X.
+
+
+
+![](https://i.gyazo.com/a8cd38376756c99c7f6879b18979a345.png "ER Diagramm")
+
+![](https://i.gyazo.com/468fb48c490133fcb88a28cac0d1ed64.png "Use case Diagramm")
+
+![](https://i.gyazo.com/f12f67798353a8134930cc8c6ce9a3cd.png "Klassendiagramm")
