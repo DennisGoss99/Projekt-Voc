@@ -5,6 +5,7 @@
 #pragma hdrstop
 
 #include "uFrmMain.h"
+#include <fstream>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -244,4 +245,12 @@ void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+
+
+void __fastcall TfrmMain::VokabeltrainerHilfe1Click(TObject *Sender)
+{
+ShellExecute(0, 0, L"https://github.com/DennisGoss99/Projekt-Voc", 0, 0 , SW_SHOW );
+}
+//---------------------------------------------------------------------------
 

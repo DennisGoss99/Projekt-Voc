@@ -80,6 +80,8 @@ __published:	// Von der IDE verwaltete Komponenten
 	TMenuItem *N1;
 	TMenuItem *Vokabelnbearbeiten1;
 	TMenuItem *Ausloggen1;
+	TMenuItem *VokabeltrainerHilfe1;
+	TMenuItem *N4;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall vcmbUnitChange(TObject *Sender);
@@ -94,6 +96,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall Statisticlschen1Click(TObject *Sender);
 	void __fastcall Ausloggen1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall VokabeltrainerHilfe1Click(TObject *Sender);
 
 
 

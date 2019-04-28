@@ -384,6 +384,13 @@ object frmMain: TfrmMain
           OnClick = Anschalten1Click
         end
       end
+      object N4: TMenuItem
+        Caption = '-'
+      end
+      object VokabeltrainerHilfe1: TMenuItem
+        Caption = 'Vokabeltrainer Hilfe'
+        OnClick = VokabeltrainerHilfe1Click
+      end
     end
   end
   object mainADOConnection: TADOConnection
