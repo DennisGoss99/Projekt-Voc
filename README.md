@@ -9,7 +9,8 @@ Dies ist unser Ablschussprojekt, es ist ein Vokabeltrainer der auf einer Zentral
 #### Die Anmeldung
 
 Um das Programm in vollen ausmahße nutzen zu können muss man sich erstmal oben Rechts in der Ecke einloggen  hierzu stehen auch folgende Accounts zu verfügung:
-* **Benutzername:** Hamster2lp **Passwort:** 1234  * **Benutzername:** Root **Passwort:** 1234
+* **Benutzername:** Hamster2lp **Passwort:** 1234   * **Benutzername:** Root **Passwort:** 1234
+
 Nach dem einloggen sehen sie automatisch auf der rechten Seite Ihre Statistik,  welche zu jedem login und nach der bearbeitung einer Unit aktualiesiert wird.
  
 #### Vokabeln und Untis bearbeiten
