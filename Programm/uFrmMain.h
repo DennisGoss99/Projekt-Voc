@@ -54,7 +54,6 @@ __published:	// Von der IDE verwaltete Komponenten
 	TMenuItem *Bearbeiten1;
 	TMenuItem *Hilfe1;
 	TMenuItem *Hilfe2;
-	TMenuItem *N1;
 	TMenuItem *Optionen1;
 	TMenuItem *Beenden1;
 	TMenuItem *N2;
@@ -77,19 +76,24 @@ __published:	// Von der IDE verwaltete Komponenten
 	TPaintBox *mPbStatistic;
 	TMenuItem *ffnen1;
 	TMenuItem *N3;
+	TMenuItem *Statisticlschen1;
+	TMenuItem *N1;
+	TMenuItem *Vokabelnbearbeiten1;
+	TMenuItem *Ausloggen1;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall vcmbUnitChange(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall Anschalten1Click(TObject *Sender);
 	void __fastcall Leeren1Click(TObject *Sender);
-	void __fastcall FormPaint(TObject *Sender);
 	void __fastcall ibtAddVocClick(TObject *Sender);
 	void __fastcall ffnen1Click(TObject *Sender);
 	void __fastcall mbtnStartVocClick(TObject *Sender);
 	void __fastcall FormConstrainedResize(TObject *Sender, int &MinWidth, int &MinHeight,
           int &MaxWidth, int &MaxHeight);
+	void __fastcall Statisticlschen1Click(TObject *Sender);
+	void __fastcall Ausloggen1Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 
 
 
@@ -100,6 +104,7 @@ private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 
 	User *mainUser;
+	bool plotStatistic = false;
 
 	__fastcall TfrmMain(TComponent* Owner);
 	void PlotStatistics(void);

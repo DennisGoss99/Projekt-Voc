@@ -15,7 +15,6 @@ object frmMain: TfrmMain
   Position = poDesigned
   OnClose = FormClose
   OnConstrainedResize = FormConstrainedResize
-  OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -335,6 +334,10 @@ object frmMain: TfrmMain
       object N2: TMenuItem
         Caption = '-'
       end
+      object Ausloggen1: TMenuItem
+        Caption = 'Ausloggen'
+        OnClick = Ausloggen1Click
+      end
       object Beenden1: TMenuItem
         Caption = 'Beenden'
         OnClick = Beenden1Click
@@ -342,12 +345,21 @@ object frmMain: TfrmMain
     end
     object Bearbeiten1: TMenuItem
       Caption = '&Bearbeiten'
-      object Hilfe1: TMenuItem
-        Caption = 'Vokabeln Einf'#252'gen'
+      object Vokabelnbearbeiten1: TMenuItem
+        Caption = 'Vokabeln bearbeiten'
+        OnClick = ibtAddVocClick
       end
-    end
-    object N1: TMenuItem
-      Caption = '-'
+      object Hilfe1: TMenuItem
+        Caption = 'Vokabelnabfrage starten'
+        OnClick = mbtnStartVocClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Statisticlschen1: TMenuItem
+        Caption = 'Statistic l'#246'schen'
+        OnClick = Statisticlschen1Click
+      end
     end
     object Hilfe2: TMenuItem
       Caption = '&Hilfe'

@@ -21,13 +21,19 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 
 void TfrmMain::PlotStatistics(void)
 {
-	if (mainUser != NULL) {
+	if (mainUser == NULL || (! plotStatistic)) return;
+	try {
 		mainPaintBox->drawStatistic(mainUser->get_totalWords(),mainUser->get_precessedWords(),mainUser->get_failedWords());
+	} catch (...) {
 	}
+
+
 }
 
 void TfrmMain::UpdateUI(int SelectUnit)
 {
+	if (mainUser == NULL) return;
+
 	//Set Combobox Items
 	frmMain->vcmbUnit->Items->Clear();
 	frmMain->vcmbUnit->Text = "";
@@ -63,17 +69,24 @@ void TfrmMain::UpdateAfterLogin(void)
 	frmMain->flbLoginNot->Caption = "Willkommen " + mainUser->get_username();
 	frmMain->fPnMainLeft->Enabled = true;
 
+	plotStatistic = true;
+
 	UpdateUI();
 }
 
 void TfrmMain::UpdateStatistic(void)
 {
-	AnsiString FailedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 0","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
-	AnsiString PrecessedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 1","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
-	AnsiString TotalWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit", "group by User_idUser");
-	AnsiString TotalUnits = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)");
+	if (mainUser == NULL) return;
 
-	cDBService.SqlExeq("Insert Into Statistic (LastVisite , TotalWords , TotalUnits , precessedWords , FailedWords , User_idUser) values (now(),'"+ TotalWords +"','"+ TotalUnits +"','"+ PrecessedWords +"','"+ FailedWords +"','"+ mainUser->get_idUser() +"')");
+	try {
+		AnsiString FailedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 0","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+		AnsiString PrecessedWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "' && Isfinished = 1","count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+		AnsiString TotalWords = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)", "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit", "group by User_idUser");
+		AnsiString TotalUnits = cDBService.SqlGetOneParameter("Unit" , "count(User_idUser)" , "User_idUser = '" + (AnsiString)mainUser->get_idUser() + "'", "count(User_idUser)");
+
+		cDBService.SqlExeq("Insert Into Statistic (LastVisite , TotalWords , TotalUnits , precessedWords , FailedWords , User_idUser) values (now(),'"+ TotalWords +"','"+ TotalUnits +"','"+ PrecessedWords +"','"+ FailedWords +"','"+ mainUser->get_idUser() +"')");
+	} catch (...) {
+	}
 }
 
 //---------------------------------------------------------------------------
@@ -96,6 +109,7 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 
 	if(tempUser)
 	{
+		mPbStatistic->Refresh();
 		delete mainUser;
 		mainUser = new User(tempUser);
 		UpdateAfterLogin();
@@ -113,6 +127,7 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 
 void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 {
+	if (mainUser == NULL) return;
 	frmMain->uimUnit->Picture->Bitmap->Assign( mainImageCollection->GetBitmap(cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage"),80,48));
 	frmMain->vgrbUnit->Caption = "Unit: " + frmMain->vcmbUnit->Text;
 	frmMain->ulbVocLag->Caption ="Sprache: " + cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
@@ -123,15 +138,21 @@ void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TfrmMain::FormPaint(TObject *Sender)
+void __fastcall TfrmMain::FormClose(TObject *Sender, TCloseAction &Action)
 {
-	//PlotStatistics();
+	if (mainUser != NULL)
+		Ausloggen1Click(NULL);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TfrmMain::ibtAddVocClick(TObject *Sender)
 {
-    frmAddVoc->Show();
+	if (mainUser == NULL) {
+		myLog.OutputError("Bitte loggen Sie sich ein.", "Nicht eingeloggt!" ,MB_OK);
+		return;
+	}
+
+	frmAddVoc->Show();
 }
 //---------------------------------------------------------------------------
 
@@ -151,12 +172,6 @@ void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TfrmMain::FormClose(TObject *Sender, TCloseAction &Action)
-{
-    UpdateStatistic();
-	delete mainUser;
-}
-//---------------------------------------------------------------------------
 // Menu Functions
 //---------------------------------------------------------------------------
 
@@ -184,18 +199,49 @@ void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
 void __fastcall TfrmMain::FormConstrainedResize(TObject *Sender, int &MinWidth, int &MinHeight,
           int &MaxWidth, int &MaxHeight)
 {
 	PlotStatistics();
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Statisticlschen1Click(TObject *Sender)
+{
+	if (mainUser == NULL) return;
+	cDBService.SqlExeq("Delete from Statistic Where User_idUser = '" + (AnsiString) mainUser->get_idUser() + "'");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
+{
+	plotStatistic = false;
+
+	if (mainUser == NULL) return;
+
+	UpdateStatistic();
+	delete mainUser;
+    mainUser = NULL;
+
+	fedLoginName->Text = "";
+    fedLoginPw->Text = "";
+
+	mPbStatistic->Refresh();
+
+	frmMain->vcmbUnit->Text = "";
+	frmMain->vcmbUnit->Items->Clear();
+	frmMain->uimUnit->Picture->Bitmap->Assign(NULL);
+	frmMain->vgrbUnit->Caption ="Unit: ";
+	frmMain->ulbVocLag->Caption ="Sprache: ";
+	frmMain->ulbVocAn->Caption  ="Anzahl Vokabeln: ";
+	frmMain->ulbVocBea->Caption ="Vokabeln bearbeitet: ";
+	frmMain->ulbVocOp->Caption ="Vokabeln offen: ";
+	frmMain->ulbVocTim->Caption ="Letzte Bearbeitung: ";
+	frmMain->mlbStatisticG->Caption = "Anzahl: ";
+	frmMain->mlbStatisticR->Caption = "Richtig: ";
+	frmMain->mlbStatisticF->Caption = "Fehlend: ";
+}
+//---------------------------------------------------------------------------
+
+
 

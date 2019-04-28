@@ -2,7 +2,7 @@
 Coordinates=379,166,88,36
 
 []
-Coordinates=370,80,86,58
+Coordinates=309,413,40,36
 LayerNames=NewLayer0
 Visible=True
 
@@ -31,9 +31,6 @@ Coordinates=264,155,90,58
 
 [Hilfe1]
 Coordinates=456,413,48,36
-
-[N1]
-Coordinates=309,413,40,36
 
 [fMainMenu]
 Coordinates=626,1,78,36
