@@ -9,7 +9,8 @@ INSERT INTO `language` (`Language`, `Contraction`) VALUES
 ( 'Finnish', 'FI'),
 ( 'Japanese', 'JP');
 
-INSERT INTO `user` (`Surname`, `Name`, `Username`, `Email`, `Password`, `CreationDate`) VALUES ('root', 'root', 'root', 'root@root', '', now());
+INSERT INTO `user` (`Surname`, `Name`, `Username`, `Email`, `Password`, `CreationDate`) VALUES ('root', 'root', 'root', 'root@root', PASSWORD(''), now());
+INSERT INTO `user` (`Surname`, `Name`, `Username`, `Email`, `Password`, `CreationDate`) VALUES ('root', 'root', 'Peter42', 'root@root', PASSWORD('1234'), now());
 
 INSERT INTO `unit` (`UnitName`, `LastEdit`, `User_idUser`, `Language_idLanguage`) VALUES ( 'BeispielUnit', now(), 1, 2);
 

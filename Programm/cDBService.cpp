@@ -35,10 +35,14 @@ AnsiString cDBService::SqlGetOneParameter(String Table,String Attribute,String W
 
 int cDBService::SqlLoginCheck(String SQL,String AttributeUser , String AttributeEmail ,String AttributePassword ,String User,String Password)
 {
-	myLog.Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + Password + "' LIMIT 1" );
+    SqlExeq("DROP TABLE IF EXISTS tempPassword");
+	SqlExeq("CREATE TEMPORARY TABLE tempPassword (Select Password('"+ Password +"') as 'Password')");
+
+	myLog.Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + SqlGetOneParameter("tempPassword","Password"," Password like '%'") + "' LIMIT 1" );
+
 	frmMain->mainADOQuery->Close();
 	frmMain->mainADOQuery->SQL->Clear();
-	frmMain->mainADOQuery->SQL->Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + Password + "' LIMIT 1" );
+	frmMain->mainADOQuery->SQL->Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + SqlGetOneParameter("tempPassword","Password"," Password like '%'") + "' LIMIT 1");
 	frmMain->mainADOQuery->Open();
 
 	frmMain->mainADOQuery->First();

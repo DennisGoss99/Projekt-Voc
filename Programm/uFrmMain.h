@@ -22,6 +22,7 @@
 #include "cPaintbox.h"
 #include "uFrmAddVoc.h"
 #include "uFrmCheckVoc.h"
+#include "ckrypt.h"
 
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm

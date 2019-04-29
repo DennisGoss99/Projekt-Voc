@@ -6,9 +6,9 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
-USEFORM("uFrmAddVoc.cpp", frmAddVoc);
-USEFORM("uFrmMain.cpp", frmMain);
 USEFORM("uFrmCheckVoc.cpp", frmCheckVoc);
+USEFORM("uFrmMain.cpp", frmMain);
+USEFORM("uFrmAddVoc.cpp", frmAddVoc);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
