@@ -329,6 +329,7 @@ object frmMain: TfrmMain
       Caption = '&Datei'
       object Optionen1: TMenuItem
         Caption = 'Optionen'
+        OnClick = Optionen1Click
       end
       object N2: TMenuItem
         Caption = '-'

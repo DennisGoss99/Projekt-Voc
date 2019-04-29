@@ -98,6 +98,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall Ausloggen1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall VokabeltrainerHilfe1Click(TObject *Sender);
+	void __fastcall Optionen1Click(TObject *Sender);
 
 
 
@@ -108,6 +109,8 @@ private:	// Benutzer-Deklarationen
 public:		// Benutzer-Deklarationen
 
 	User *mainUser;
+	PaintBox *mainPaintBox;
+
 	bool plotStatistic = false;
 
 	__fastcall TfrmMain(TComponent* Owner);

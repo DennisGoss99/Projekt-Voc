@@ -12,7 +12,6 @@
 #pragma resource "*.dfm"
 TfrmMain *frmMain;
 
-PaintBox *mainPaintBox;
 //---------------------------------------------------------------------------
 __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 	: TForm(Owner)
@@ -221,6 +220,7 @@ void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
 
 	UpdateStatistic();
 	delete mainUser;
+	delete mainPaintBox;
     mainUser = NULL;
 
 	fedLoginName->Text = "";
@@ -243,13 +243,15 @@ void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
-
-
 void __fastcall TfrmMain::VokabeltrainerHilfe1Click(TObject *Sender)
 {
-ShellExecute(0, 0, L"https://github.com/DennisGoss99/Projekt-Voc", 0, 0 , SW_SHOW );
+	ShellExecute(0, 0, L"https://github.com/DennisGoss99/Projekt-Voc", 0, 0 , SW_SHOW );
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmMain::Optionen1Click(TObject *Sender)
+{
+    //Todo: Options
 }
 //---------------------------------------------------------------------------
 
