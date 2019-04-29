@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>VokabeltrainerDGJE.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
     </PropertyGroup>
@@ -122,6 +122,11 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DynamicRTL>false</DynamicRTL>
+        <UsePackages>false</UsePackages>
+        <LinkPackageStatics>rtl.lib;vcl.lib;VclSmp.lib;vclx.lib;dbrtl.lib;adortl.lib;vcldb.lib;vclwinx.lib;vclimg.lib</LinkPackageStatics>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="cDBService.cpp">
@@ -177,9 +182,9 @@
             <BuildOrder>1</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <FormResources Include="uFrmAddVoc.dfm"/>
         <FormResources Include="uFrmCheckVoc.dfm"/>
         <FormResources Include="uFrmMain.dfm"/>
-        <FormResources Include="uFrmAddVoc.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

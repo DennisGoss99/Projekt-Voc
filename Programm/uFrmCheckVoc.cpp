@@ -103,9 +103,9 @@ void __fastcall TfrmCheckVoc::FormShow(TObject *Sender)
 {
     SelectedUnit = frmMain->vcmbUnit->Items->Strings[frmMain->vcmbUnit->ItemIndex];
 
-	UnitWord = cDBService.SqlGetArray("Vocabulary", "Word", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && IsFinished = '0' || Isfinished = -1");
-	UnitWordTranslated = cDBService.SqlGetArray("Vocabulary", "WordTranslated", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && IsFinished = '0' || Isfinished = -1");
-	UnitGlossary = cDBService.SqlGetArray("Vocabulary", "Glossary", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && IsFinished = '0' || Isfinished = -1");
+	UnitWord = cDBService.SqlGetArray("Vocabulary", "Word", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && (IsFinished = '0' || Isfinished = -1)");
+	UnitWordTranslated = cDBService.SqlGetArray("Vocabulary", "WordTranslated", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && (IsFinished = '0' || Isfinished = -1)");
+	UnitGlossary = cDBService.SqlGetArray("Vocabulary", "Glossary", "Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ SelectedUnit +"'") +"' && (IsFinished = '0' || Isfinished = -1)");
 
     NewVoc();
 

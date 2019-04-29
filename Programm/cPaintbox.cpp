@@ -35,6 +35,8 @@ void PaintBox::drawStatistic(std::vector<int> totalWords, std::vector<int> prece
 		}
 	}
 
+	if (biggestValue == 0)return;
+
 	for (int i = 0; i < totalWords.size(); i++) {
 
 		if(i >= 99) return;

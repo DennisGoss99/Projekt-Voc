@@ -301,7 +301,6 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       PasswordChar = '*'
       TabOrder = 1
-      Text = '1234'
     end
     object fedLoginName: TEdit
       Left = 487
@@ -310,7 +309,7 @@ object frmMain: TfrmMain
       Height = 21
       Anchors = [akTop, akRight]
       TabOrder = 0
-      Text = 'hamster2lp'
+      Text = 'root'
     end
     object fbtLogin: TButton
       Left = 821

@@ -28,7 +28,6 @@ void TfrmMain::PlotStatistics(void)
 	} catch (...) {
 	}
 
-
 }
 
 void TfrmMain::UpdateUI(int SelectUnit)
@@ -196,7 +195,7 @@ void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 
 void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 {
-	system("notepad ..\\..\\..\\Resources\\Log\\Log.txt");
+	ShellExecute(0, 0, L"..\\..\\..\\Resources\\Log\\Log.txt", 0, 0 , SW_SHOW );
 }
 //---------------------------------------------------------------------------
 
