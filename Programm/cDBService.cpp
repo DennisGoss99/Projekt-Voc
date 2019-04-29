@@ -38,11 +38,13 @@ int cDBService::SqlLoginCheck(String SQL,String AttributeUser , String Attribute
     SqlExeq("DROP TABLE IF EXISTS tempPassword");
 	SqlExeq("CREATE TEMPORARY TABLE tempPassword (Select Password('"+ Password +"') as 'Password')");
 
-	myLog.Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + SqlGetOneParameter("tempPassword","Password"," Password like '%'") + "' LIMIT 1" );
+	myLog.Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + SqlGetOneParameter("tempPassword","Password"," Password like '%'") + "' LIMIT 1" );   //SqlGetOneParameter("tempPassword","Password"," Password like '%'")
+
+	AnsiString Test53 =  SqlGetOneParameter("tempPassword","Password"," Password like '%'");
 
 	frmMain->mainADOQuery->Close();
 	frmMain->mainADOQuery->SQL->Clear();
-	frmMain->mainADOQuery->SQL->Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + SqlGetOneParameter("tempPassword","Password"," Password like '%'") + "' LIMIT 1");
+	frmMain->mainADOQuery->SQL->Add(SQL + " Where (" + AttributeUser + " like '" + User + "' || " + AttributeEmail + " like '" + User + "' )&& " + AttributePassword + " = '" + Test53 + "' LIMIT 1");
 	frmMain->mainADOQuery->Open();
 
 	frmMain->mainADOQuery->First();
