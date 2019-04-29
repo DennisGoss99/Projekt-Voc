@@ -384,12 +384,19 @@ object frmMain: TfrmMain
           OnClick = Anschalten1Click
         end
       end
+      object N4: TMenuItem
+        Caption = '-'
+      end
+      object VokabeltrainerHilfe1: TMenuItem
+        Caption = 'Vokabeltrainer Hilfe'
+        OnClick = VokabeltrainerHilfe1Click
+      end
     end
   end
   object mainADOConnection: TADOConnection
     ConnectionString = 
-      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=DataV' +
-      'oc;'
+      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=VOKAB' +
+      'ELTRAINER'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
     Left = 193

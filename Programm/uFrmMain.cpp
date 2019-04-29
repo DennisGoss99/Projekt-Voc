@@ -5,6 +5,7 @@
 #pragma hdrstop
 
 #include "uFrmMain.h"
+#include <fstream>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -163,7 +164,7 @@ void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 	return;
 	}
 
-	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0", "count(idVocabulary)" ))
+	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0 || Isfinished = -1", "count(idVocabulary)" ))
 		cDBService.SqlExeq("Update Vocabulary Set Isfinished = 0 Where Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"'");
 
 
@@ -244,4 +245,12 @@ void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+
+
+void __fastcall TfrmMain::VokabeltrainerHilfe1Click(TObject *Sender)
+{
+ShellExecute(0, 0, L"https://github.com/DennisGoss99/Projekt-Voc", 0, 0 , SW_SHOW );
+}
+//---------------------------------------------------------------------------
 

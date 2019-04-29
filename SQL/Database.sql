@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema VocTrainer
+-- Schema VOKABELTRAINER
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema VocTrainer
+-- Schema VOKABELTRAINER
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `VocTrainer` DEFAULT CHARACTER SET utf8 ;
-USE `VocTrainer` ;
+CREATE SCHEMA IF NOT EXISTS `VOKABELTRAINER` DEFAULT CHARACTER SET utf8 ;
+USE `VOKABELTRAINER` ;
 
 -- -----------------------------------------------------
--- Table `VocTrainer`.`User`
+-- Table `VOKABELTRAINER`.`User`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `VocTrainer`.`User` (
+CREATE TABLE IF NOT EXISTS `VOKABELTRAINER`.`User` (
   `idUser` INT NOT NULL AUTO_INCREMENT,
   `Surname` VARCHAR(45) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
@@ -33,9 +33,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `VocTrainer`.`Language`
+-- Table `VOKABELTRAINER`.`Language`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `VocTrainer`.`Language` (
+CREATE TABLE IF NOT EXISTS `VOKABELTRAINER`.`Language` (
   `idLanguage` INT NOT NULL AUTO_INCREMENT,
   `Language` VARCHAR(45) NOT NULL,
   `Contraction` VARCHAR(45) NOT NULL,
@@ -44,9 +44,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `VocTrainer`.`Unit`
+-- Table `VOKABELTRAINER`.`Unit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `VocTrainer`.`Unit` (
+CREATE TABLE IF NOT EXISTS `VOKABELTRAINER`.`Unit` (
   `idUnit` INT NOT NULL AUTO_INCREMENT,
   `UnitName` VARCHAR(45) NOT NULL,
   `LastEdit` DATE NULL,
@@ -54,20 +54,20 @@ CREATE TABLE IF NOT EXISTS `VocTrainer`.`Unit` (
   `Language_idLanguage` INT NOT NULL,
   PRIMARY KEY (`idUnit`),
     FOREIGN KEY (`User_idUser`)
-    REFERENCES `VocTrainer`.`User` (`idUser`)
+    REFERENCES `VOKABELTRAINER`.`User` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (`Language_idLanguage`)
-    REFERENCES `VocTrainer`.`Language` (`idLanguage`)
+    REFERENCES `VOKABELTRAINER`.`Language` (`idLanguage`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `VocTrainer`.`Vocabulary`
+-- Table `VOKABELTRAINER`.`Vocabulary`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `VocTrainer`.`Vocabulary` (
+CREATE TABLE IF NOT EXISTS `VOKABELTRAINER`.`Vocabulary` (
   `idVocabulary` INT NOT NULL AUTO_INCREMENT,
   `Word` VARCHAR(100) NOT NULL,
   `WordTranslated` VARCHAR(100) NOT NULL,
@@ -76,16 +76,16 @@ CREATE TABLE IF NOT EXISTS `VocTrainer`.`Vocabulary` (
   `Unit_idUnit` INT NOT NULL,
   PRIMARY KEY (`idVocabulary`),
     FOREIGN KEY (`Unit_idUnit`)
-    REFERENCES `VocTrainer`.`Unit` (`idUnit`)
+    REFERENCES `VOKABELTRAINER`.`Unit` (`idUnit`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `VocTrainer`.`Statistic`
+-- Table `VOKABELTRAINER`.`Statistic`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `VocTrainer`.`Statistic` (
+CREATE TABLE IF NOT EXISTS `VOKABELTRAINER`.`Statistic` (
   `idStatistic` INT NOT NULL AUTO_INCREMENT,
   `LastVisite` DATE NULL,
   `TotalWords` INT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `VocTrainer`.`Statistic` (
   `User_idUser` INT NOT NULL,
   PRIMARY KEY (`idStatistic`),
     FOREIGN KEY (`User_idUser`)
-    REFERENCES `VocTrainer`.`User` (`idUser`)
+    REFERENCES `VOKABELTRAINER`.`User` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
