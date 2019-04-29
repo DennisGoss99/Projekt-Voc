@@ -16,8 +16,17 @@ Nach dem einloggen sehen sie automatisch auf der rechten Seite Ihre Statistik,  
  
 #### Vokabeln und Untis bearbeiten
 
-Mit dem Button -_____- öffnet sich ein neues Form, in welchem sie Ihre Units bearbeiten können ode rauch löschen.  
+Mit dem Button -_____- öffnet sich ein neues Form, in welchem Sie ihre Units bearbeiten können oder auch löschen.  
 Um eine Unit zu Löschen, wählen sie die zulöschende Unit aus und drücken sie oben Rechts auf das X.
+Sie können auch den Namen der Unit änder oder auch die sprache umstellen.
+Zudem kann man natürlich auch neue Units hinzufügen, über die erste ComboBox auf der linken seite.
+
+Sobald man eine Unit ausgewählt hat oder eine neue einfügen will, kann man nun über die Drei Editfelder in der unteren hälfte die Vokabeln einfügen. 
+Dazu gibt man einafch in dem ersten Editfeld die Vokabel auf Deutsch an, daneben dann die übersetztung und falls man möchte kann man im letzten Editfeld auch noch ein Glossar zu der Vokabel hinzufügen.
+Auch im nachhinnein ist es immer möglich Vokabeln zu bearbeiten.
+
+
+#### Die Vokabel abfrage
 
 
 
