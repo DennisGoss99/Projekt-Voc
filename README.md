@@ -4,6 +4,7 @@
 
 Dies ist unser Ablschussprojekt, es ist ein Vokabeltrainer der auf einem zentralen Server liegt, auf den sich dann unterschiedlich User von unterschiedlichen Standorten anmelden können. Welche unabhängig von einander arbeiten können. Da dies unsere Aufgabenstellung nicht zulässt, muss jeder Client einen seperaten MysqlServer während der Anwendung auf seinem Rechner laufen lassen. Zusätzlich muss man noch ODBC konfigurieren. 
 
+![](https://github.com/DennisGoss99/Projekt-Voc/blob/master/Resources/pictures/MianFormBeispielBild.PNG?raw=true "MianFormBeispielBild")
 ## Anleitung / Hilfe
 
 ### Hauptfenster
@@ -68,7 +69,6 @@ Unter dem Menüpunkt "Hilfe/Log", können sie die Logdatei öffnen und den Log e
 ![](https://github.com/DennisGoss99/Projekt-Voc/blob/master/Diagramme/Use%20case.png "Use case Diagramm")
 
 ![](https://github.com/DennisGoss99/Projekt-Voc/blob/master/Diagramme/Erdiagramm.png "ER Diagramm")
-
 
 ![](https://github.com/DennisGoss99/Projekt-Voc/blob/master/Diagramme/Klassendiagramm.png "Klassendiagramm")
 
