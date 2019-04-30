@@ -39,12 +39,18 @@ object frmMain: TfrmMain
       545
       394)
     object mlbStatisticG: TLabel
-      Left = 27
-      Top = 361
+      Left = 34
+      Top = 357
       Width = 39
       Height = 13
       Anchors = [akLeft, akBottom]
       Caption = 'Anzahl: '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clHighlight
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object mlbStatisticR: TLabel
       Left = 175
@@ -309,7 +315,6 @@ object frmMain: TfrmMain
       Height = 21
       Anchors = [akTop, akRight]
       TabOrder = 0
-      Text = 'root'
     end
     object fbtLogin: TButton
       Left = 821
@@ -360,6 +365,10 @@ object frmMain: TfrmMain
         Caption = 'Statistic l'#246'schen'
         OnClick = Statisticlschen1Click
       end
+    end
+    object Statisticzeichnen1: TMenuItem
+      Caption = '&Statistik zeichnen'
+      OnClick = Statisticzeichnen1Click
     end
     object Hilfe2: TMenuItem
       Caption = '&Hilfe'

@@ -15,6 +15,7 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.BaseImageCollection.hpp>
 #include <Vcl.ImageCollection.hpp>
+#include <Registry.hpp>
 
 #include "cDBService.h"
 #include "cUser.h"
@@ -83,6 +84,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	TMenuItem *Ausloggen1;
 	TMenuItem *VokabeltrainerHilfe1;
 	TMenuItem *N4;
+	TMenuItem *Statisticzeichnen1;
 	void __fastcall fbtLoginClick(TObject *Sender);
 	void __fastcall Beenden1Click(TObject *Sender);
 	void __fastcall vcmbUnitChange(TObject *Sender);
@@ -98,6 +100,7 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall Ausloggen1Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall VokabeltrainerHilfe1Click(TObject *Sender);
+	void __fastcall Statisticzeichnen1Click(TObject *Sender);
 	void __fastcall Optionen1Click(TObject *Sender);
 
 
@@ -110,6 +113,8 @@ public:		// Benutzer-Deklarationen
 
 	User *mainUser;
 	PaintBox *mainPaintBox;
+    RegistryData *AnsiString;
+
 
 	bool plotStatistic = false;
 
@@ -117,7 +122,9 @@ public:		// Benutzer-Deklarationen
 	void PlotStatistics(void);
 	void UpdateUI(int SelectUnit = -1);
 	void UpdateAfterLogin(void);
-    void UpdateStatistic(void);
+	void UpdateStatistic(void);
+
+	TRegistry * Registry;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

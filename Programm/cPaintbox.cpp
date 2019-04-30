@@ -12,6 +12,8 @@ PaintBox::PaintBox(TPaintBox *graph){
 
 void PaintBox::drawStatistic(std::vector<int> totalWords, std::vector<int> precessedWords, std::vector<int> failedWords){
 
+	if (graph== NULL) return;
+
 	float biggestValue = 0;
 	const static int paintBoxTop = 10;
 	const static int StartSpacer = 20;

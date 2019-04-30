@@ -71,3 +71,25 @@ Unter dem Menüpunkt "Hilfe/Log", können sie die Logdatei öffnen und den Log e
 
 
 ![](https://github.com/DennisGoss99/Projekt-Voc/blob/master/Diagramme/Klassendiagramm.png "Klassendiagramm")
+
+
+### Kontaktdaten
+
+Bei Rückfragen bitte melden:
+
+### SSC
+#### CEO / CBDO : Dennis Gossler
+	email: dennisgossler98@gmail.com
+	tel:   +49 157 82518921 
+	
+	Zuständig für:  Firmenchef, Business Development, Projekt Management
+
+
+#### CKO / CTO  : Jonas Eller
+	email: jonasnr8eller@aol.de
+	tel:	+49 172 4693868
+	
+	Zuständig für: Time Management, Wissensmanagement, Development
+	
+	
+
