@@ -40,7 +40,7 @@ object frmMain: TfrmMain
       394)
     object mlbStatisticG: TLabel
       Left = 34
-      Top = 357
+      Top = 361
       Width = 39
       Height = 13
       Anchors = [akLeft, akBottom]

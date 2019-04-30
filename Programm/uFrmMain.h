@@ -113,7 +113,6 @@ public:		// Benutzer-Deklarationen
 
 	User *mainUser;
 	PaintBox *mainPaintBox;
-    RegistryData *AnsiString;
 
 
 	bool plotStatistic = false;

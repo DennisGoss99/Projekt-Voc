@@ -90,7 +90,7 @@ String krypt::gStrPr(int start,int ende)
  for (int i = start; i <= ende; i++) {
 
                                                               //Creates a character string from the prime numbers in the range
-  if(gPr(i)){e range
+  if(gPr(i)){
   Primzahlen = Primzahlen + i;
   }
 

@@ -19,7 +19,7 @@ __fastcall TfrmAddVoc::TfrmAddVoc(TComponent* Owner)
 }
 
 //---------------------------------------------------------------------------
-AnsiString TfrmAddVoc::ListToWhereString(TListBox *listBox)
+AnsiString TfrmAddVoc::ListToWhereString(TListBox *listBox)	//converts the contents of a list box to a "Where String"
 {
 AnsiString returnString = "(";
 
@@ -39,7 +39,7 @@ AnsiString returnString = "(";
 	return returnString;
 }
 
-void TfrmAddVoc::ClearVoc(void)
+void TfrmAddVoc::ClearVoc(void)	//Empties the UI						
 {
 	lbVocNT->Items->Clear();
 	lbVocT->Items->Clear();
@@ -52,7 +52,7 @@ void TfrmAddVoc::ClearVoc(void)
 	edGlos->Text = "";
 }
 
-void TfrmAddVoc::FillListbox(TListBox *listBox, std::vector<AnsiString> tempList)
+void TfrmAddVoc::FillListbox(TListBox *listBox, std::vector<AnsiString> tempList)	
 {
 	listBox->Items->Clear();
 
@@ -77,9 +77,9 @@ void TfrmAddVoc::FillListbox(TComboBox *comboBox, std::vector<AnsiString> tempLi
 
 void __fastcall TfrmAddVoc::FormResize(TObject *Sender)
 {
-	grbVocNT->Width =grbVocmain->Width/4;
+	grbVocNT->Width =grbVocmain->Width/4;		
 	grbVocT->Width =grbVocmain->Width/4;
-	grbGlos->Width = grbVocmain->Width/2;
+	grbGlos->Width = grbVocmain->Width/2;	//allows to maximize the window beautifully
 }
 //---------------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ void __fastcall TfrmAddVoc::FormShow(TObject *Sender)
 
 	FillListbox(cmbUnitLang ,cDBService.SqlGetArray("Language","Language","idLanguage","%"));
 
-	ClearVoc();
+	ClearVoc();	//deletes the vocabulary lists items
 
 	lbVocNT->Items->Add("-- hinzufügen --");
 	lbVocT->Items->Add("-- hinzufügen --");
@@ -116,7 +116,7 @@ void __fastcall TfrmAddVoc::cmbUnitChange(TObject *Sender)
 	cmbUnitLang->Text = cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + cmbUnit->Text + "' && User_idUser = '"+ frmMain->mainUser->get_idUser() +"'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
 	cmbUnitLangChange(NULL);
 
-    ClearVoc();
+    ClearVoc();	//deletes the vocabulary lists items
 
 	FillListbox(lbVocNT,cDBService.SqlGetArray("Vocabulary", "Word" , "Where Unit_idUnit ='" + cDBService.SqlGetOneParameter("Unit", "idUnit"," UnitName = '"+ cmbUnit->Text +"' && User_idUser = '"+ frmMain->mainUser->get_idUser() +"'") + "'"));
 	FillListbox(lbVocT,cDBService.SqlGetArray("Vocabulary", "WordTranslated" , "Where Unit_idUnit ='" + cDBService.SqlGetOneParameter("Unit", "idUnit"," UnitName = '"+ cmbUnit->Text +"' && User_idUser = '"+ frmMain->mainUser->get_idUser() +"'") + "'"));
@@ -125,14 +125,12 @@ void __fastcall TfrmAddVoc::cmbUnitChange(TObject *Sender)
 	lbVocNT->Items->Add("-- hinzufügen --");
 	lbVocT->Items->Add("-- hinzufügen --");
 	lbGlos->Items->Add("-- hinzufügen --");
-
-
-
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TfrmAddVoc::cmbUnitLangChange(TObject *Sender)
 {
+	//Sets the language matching the ComboBox
 	imUnit->Picture->Bitmap->Assign( frmMain->mainImageCollection->GetBitmap(cmbUnitLang->Text,80,48));
 }
 //---------------------------------------------------------------------------
@@ -148,12 +146,16 @@ void __fastcall TfrmAddVoc::btnUnitDelClick(TObject *Sender)
 
 	if(Application->MessageBox(L"Wollen Sie diese Unit wirklich loeschen?",L"Sind Sie sich sicher?",MB_OKCANCEL) == 2)return;
 
+	//deletes the selectet unit
+	
 	cDBService.SqlExeq("Delete Vocabulary from Unit inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit Where User_idUser = '" + (AnsiString)frmMain->mainUser->get_idUser() + "' && Unitname = '"+ cmbUnit->Text +"'");
 
 	cDBService.SqlExeq("Delete from Unit Where UnitName = '"+ cmbUnit->Text +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'"  );
 
 	cmbUnit->Items->Delete(cmbUnit->ItemIndex);
 
+	
+	
 	edUnitName->Text = "";
 	cmbUnit->Text = "";
 	cmbUnitLang->Text = "";
@@ -177,7 +179,7 @@ void __fastcall TfrmAddVoc::lbVocNTClick(TObject *Sender)
 	try
 	{
 		if (lbVocNT->Items->Count-1==lbVocNT->ItemIndex){
-			//resets edit and selects hinzufügen
+
 			lbVocNT->ItemIndex = -1;
 			lbVocT->ItemIndex = -1;
 			lbGlos->ItemIndex = -1;
@@ -353,8 +355,7 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 
 	bool unitExists = false;
 
-	for (int i = 0; i < cmbUnit->Items->Count -1 ; i++) {
-
+	for (int i = 0; i < cmbUnit->Items->Count -1 ; i++) { //goes through all units in the ComboBox
 
 		if (cmbUnit->Items->Strings[cmbUnit->ItemIndex] == cmbUnit->Items->Strings[i]) {
 			unitExists = true;
@@ -362,27 +363,33 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 		}
 	}
 
-	if (unitExists) {
+	if (unitExists) {	//If the unit exists then it will be updated
 		cDBService.SqlExeq("Update Unit Set UnitName = '" + edUnitName->Text + "', Language_IdLanguage = '" + cDBService.SqlGetOneParameter("Language", "IdLanguage", "language = '"+ cmbUnitLang->Text +"'") + "' Where UnitName = '"+ cmbUnit->Items->Strings[cmbUnit->ItemIndex] +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'");
-	}else{
-		if (cmbUnitLang->ItemIndex == -1) {
+	}else{								
+		if (cmbUnitLang->ItemIndex == -1) {	//If no language is selected then an error will be output.
 		Application->MessageBox(L"Bitte Geben Sie eine Sprache an!",L"Falsche Eingabe",MB_OK);
 		myLog.Add("Keine Sprache ausgewählt!",2);
 		return;
 		}
 
+		//adds the new unit
 		cDBService.SqlExeq("INSERT INTO Unit (IdUnit, UnitName, LastEdit, User_IdUser,Language_IdLanguage) VALUES (default, '"+ edUnitName->Text +"', now() ,'" + frmMain->mainUser->get_idUser() +"' , '"+ cDBService.SqlGetOneParameter("Language", "IdLanguage", "language = '"+ cmbUnitLang->Text +"'") +"' )");
 
     }
 
+	//Deletes all vocabulary that has changed or been deleted.
 	cDBService.SqlExeq("Delete from Vocabulary Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'") +"' &&( Word not in "+ ListToWhereString(lbVocNT) + "|| WordTranslated not in "+ ListToWhereString(lbVocT)+ "|| Glossary not in "+ ListToWhereString(lbGlos) + ")");
 
+	//Goes through all vocabulary in Listbox
 	for (int i = 0; i < lbVocNT->Items->Count -1; i++) {
+			//adds any vocabulary that has changed or is new
 			cDBService.SqlExeq("Insert into vocabulary (Word,WordTranslated,IsFinished,Glossary,Unit_idUnit) Select * from (Select '"+ lbVocNT->Items->Strings[i] +"','"+ lbVocT->Items->Strings[i] +"', '-1' ,'"+ lbGlos->Items->Strings[i] +"','"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'") +"' ) AS tmp Where NOT EXISTS(Select Word from vocabulary Where word = '"+ lbVocNT->Items->Strings[i] +"') || NOT EXISTS(Select WordTranslated from vocabulary Where WordTranslated = '"+ lbVocT->Items->Strings[i] +"') || NOT EXISTS(Select Glossary from vocabulary Where Glossary = '"+ lbGlos->Items->Strings[i] +"')");
 	}
 
+	//Updates FrmMain
 	frmMain->UpdateUI();
 
+	//ask if the window should be closed
 	if(Application->MessageBox(L"Wollen Sie das Fenster nun schliessen?",L"Erfolgreich gespeichert!",MB_OKCANCEL) == 1)this->Close();
 
 }

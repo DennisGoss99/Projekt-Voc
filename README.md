@@ -12,7 +12,7 @@ Dies ist unser Ablschussprojekt, es ist ein Vokabeltrainer der auf einem zentral
 #### Die Anmeldung
 
 Um das Programm in vollen ausmahße nutzen zu können, muss man sich erstmal oben Rechts in der Ecke einloggen. Hierzu stehen auch folgende Accounts zu verfügung:
-* **Benutzername:** TestUser1 **Passwort:** 1234 
+* **Benutzername:** TestUser1 **Passwort:** 1234 	*+ Beispiel Vokabeln*	
 * **Benutzername:** Root 	**Passwort:** (Kein Passwort)
 
 Da die Software dazu ausgelegt ist, dass nur ein Administrator Benutzer über den Zentralserver verwalten kann, können Sie selber nur Benutzer dierekt über die lokale Datenbank verwalten (anlegen / löschen / bearbeiten).  
