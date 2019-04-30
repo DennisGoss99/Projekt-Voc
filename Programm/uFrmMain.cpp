@@ -75,6 +75,7 @@ void TfrmMain::UpdateAfterLogin(void)
 
 void TfrmMain::UpdateStatistic(void)
 {
+    //writes a new data record to the statistics
 	if (mainUser == NULL) return;
 
 	try {
@@ -113,7 +114,7 @@ void __fastcall TfrmMain::fbtLoginClick(TObject *Sender)
 		mainUser = new User(tempUser);
 		UpdateAfterLogin();
 
-		//Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
+		Application->MessageBox(L"Angemeldet",L"Anmeldung war erfolgreich",MB_OK);
 		myLog.Add("Anmeldung User:" + fedLoginName->Text,1);
 
 	}else
@@ -129,10 +130,10 @@ void __fastcall TfrmMain::vcmbUnitChange(TObject *Sender)
 	if (mainUser == NULL) return;
 	frmMain->uimUnit->Picture->Bitmap->Assign( mainImageCollection->GetBitmap(cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage"),80,48));
 	frmMain->vgrbUnit->Caption = "Unit: " + frmMain->vcmbUnit->Text;
-	frmMain->ulbVocLag->Caption ="Sprache: " + cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
-	frmMain->ulbVocAn->Caption  ="Anzahl Vokabeln: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "'", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
-	frmMain->ulbVocBea->Caption = "Vokabeln bearbeitet: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 1", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
-	frmMain->ulbVocOp->Caption = "Vokabeln offen: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 0", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
+	frmMain->ulbVocLag->Caption ="Sprache: " + cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && User_idUser = '" + mainUser->get_idUser() + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
+	frmMain->ulbVocAn->Caption  ="Anzahl Vokabeln: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && User_idUser = '" + mainUser->get_idUser() + "'", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit");
+	frmMain->ulbVocBea->Caption = "Vokabeln bearbeitet: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 1  && User_idUser = '" + mainUser->get_idUser() + "'", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
+	frmMain->ulbVocOp->Caption = "Vokabeln offen: " + cDBService.SqlGetOneParameter("Unit" , "count(IsFinished)" , "UnitName = '" + frmMain->vcmbUnit->Text + "' && Isfinished = 0  && User_idUser = '" + mainUser->get_idUser() + "'", "count(IsFinished)" , "inner join Vocabulary on Vocabulary.Unit_idUnit = Unit.idUnit","group by IsFinished");
 	frmMain->ulbVocTim->Caption = "Letzte Bearbeitung: " + cDBService.SqlGetOneParameter("Unit","LastEdit","UnitName = '" + frmMain->vcmbUnit->Text+ "'");
 }
 //---------------------------------------------------------------------------
@@ -162,7 +163,7 @@ void __fastcall TfrmMain::mbtnStartVocClick(TObject *Sender)
 	return;
 	}
 
-	if(0 == cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 0 || Isfinished = -1", "count(idVocabulary)" ))
+	if(0 < cDBService.SqlGetOneParameter("vocabulary" , "count(idVocabulary)", "Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"' && Isfinished = 1", "count(idVocabulary)" ))
 		cDBService.SqlExeq("Update Vocabulary Set Isfinished = 0 Where Unit_idUnit = '" +cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ vcmbUnit->Items->Strings[vcmbUnit->ItemIndex] +"'")+"'");
 
 
@@ -194,7 +195,7 @@ void __fastcall TfrmMain::Leeren1Click(TObject *Sender)
 
 void __fastcall TfrmMain::ffnen1Click(TObject *Sender)
 {
-	ShellExecute(0, 0, L"..\\..\\..\\Resources\\Log\\Log.txt", 0, 0 , SW_SHOW );
+	ShellExecute(0, 0, L"..\\..\\..\\Resources\\Log\\Log.txt", 0, 0 , SW_SHOW );  // opens the Log.txt file with the standard software
 }
 //---------------------------------------------------------------------------
 
@@ -209,6 +210,7 @@ void __fastcall TfrmMain::Statisticlschen1Click(TObject *Sender)
 {
 	if (mainUser == NULL) return;
 	cDBService.SqlExeq("Delete from Statistic Where User_idUser = '" + (AnsiString) mainUser->get_idUser() + "'");
+	Application->MessageBox(L"Bitte starten Sie das Programm neu",L"Neustarten!",MB_OK);
 }
 //---------------------------------------------------------------------------
 
@@ -240,6 +242,8 @@ void __fastcall TfrmMain::Ausloggen1Click(TObject *Sender)
 	frmMain->mlbStatisticG->Caption = "Anzahl: ";
 	frmMain->mlbStatisticR->Caption = "Richtig: ";
 	frmMain->mlbStatisticF->Caption = "Fehlend: ";
+	frmMain->flbLoginNot->Caption = "Nicht Eingeloggt!";
+	frmMain->fPnMainLeft->Enabled = false;
 }
 //---------------------------------------------------------------------------
 
@@ -249,9 +253,27 @@ void __fastcall TfrmMain::VokabeltrainerHilfe1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TfrmMain::Statisticzeichnen1Click(TObject *Sender)
+{
+	PlotStatistics();
+}
+//---------------------------------------------------------------------------
+
 void __fastcall TfrmMain::Optionen1Click(TObject *Sender)
 {
-    //Todo: Options
+	AnsiString DateiName;
+	Registry = new TRegistry;
+	try {
+		Registry->RootKey = HKEY_LOCAL_MACHINE;
+		Registry->OpenKey("SOFTWARE\\SSC\\Registry\\user", true);
+		DateiName = Registry->ReadString(mainUser->get_idUser());
+		Registry->CloseKey();
+		RegistryData = DateiName;
+	} catch (...) {
+	Application->MessageBox(L"Reg.Schlüssel fehlt bzw.Datei existiert nicht",L"Fehler",MB_OK);
+	}
 }
 //---------------------------------------------------------------------------
 

@@ -113,7 +113,7 @@ void __fastcall TfrmAddVoc::cmbUnitChange(TObject *Sender)
 {
 	edUnitName->Text = cmbUnit->Text;
 
-	cmbUnitLang->Text = cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + cmbUnit->Text + "'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
+	cmbUnitLang->Text = cDBService.SqlGetOneParameter("Unit" , "Language" , "UnitName = '" + cmbUnit->Text + "' && User_idUser = '"+ frmMain->mainUser->get_idUser() +"'", "*" , "inner join Language on Language.idLanguage = Unit.Language_idLanguage");
 	cmbUnitLangChange(NULL);
 
     ClearVoc();
@@ -375,10 +375,10 @@ void __fastcall TfrmAddVoc::btnSaveClick(TObject *Sender)
 
     }
 
-	cDBService.SqlExeq("Delete from Vocabulary Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' &&( Word not in "+ ListToWhereString(lbVocNT) + "|| WordTranslated not in "+ ListToWhereString(lbVocT)+ "|| Glossary not in "+ ListToWhereString(lbGlos) + ")");
+	cDBService.SqlExeq("Delete from Vocabulary Where Unit_idUnit = '"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'") +"' &&( Word not in "+ ListToWhereString(lbVocNT) + "|| WordTranslated not in "+ ListToWhereString(lbVocT)+ "|| Glossary not in "+ ListToWhereString(lbGlos) + ")");
 
 	for (int i = 0; i < lbVocNT->Items->Count -1; i++) {
-			cDBService.SqlExeq("Insert into vocabulary (Word,WordTranslated,IsFinished,Glossary,Unit_idUnit) Select * from (Select '"+ lbVocNT->Items->Strings[i] +"','"+ lbVocT->Items->Strings[i] +"', '-1' ,'"+ lbGlos->Items->Strings[i] +"','"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"'") +"' ) AS tmp Where NOT EXISTS(Select Word from vocabulary Where word = '"+ lbVocNT->Items->Strings[i] +"') || NOT EXISTS(Select WordTranslated from vocabulary Where WordTranslated = '"+ lbVocT->Items->Strings[i] +"') || NOT EXISTS(Select Glossary from vocabulary Where Glossary = '"+ lbGlos->Items->Strings[i] +"')");
+			cDBService.SqlExeq("Insert into vocabulary (Word,WordTranslated,IsFinished,Glossary,Unit_idUnit) Select * from (Select '"+ lbVocNT->Items->Strings[i] +"','"+ lbVocT->Items->Strings[i] +"', '-1' ,'"+ lbGlos->Items->Strings[i] +"','"+ cDBService.SqlGetOneParameter("Unit","idUnit", "UnitName = '"+ edUnitName->Text +"' && User_idUser = '" + frmMain->mainUser->get_idUser() + "'") +"' ) AS tmp Where NOT EXISTS(Select Word from vocabulary Where word = '"+ lbVocNT->Items->Strings[i] +"') || NOT EXISTS(Select WordTranslated from vocabulary Where WordTranslated = '"+ lbVocT->Items->Strings[i] +"') || NOT EXISTS(Select Glossary from vocabulary Where Glossary = '"+ lbGlos->Items->Strings[i] +"')");
 	}
 
 	frmMain->UpdateUI();
